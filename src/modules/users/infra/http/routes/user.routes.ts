@@ -13,10 +13,6 @@ const upload = multer(uploadConfig.multer);
 const usersController = new UsersController();
 const userAvatarController = new UserAvatarController();
 
-userRouter.get('/', async (req, res) => {
-  return res.json({ message: 'ok' });
-});
-
 userRouter.post(
   '/',
   celebrate({
@@ -28,6 +24,8 @@ userRouter.post(
   }),
   usersController.create,
 );
+
+userRouter.get('/', usersController.index);
 
 userRouter.patch(
   '/avatar',
