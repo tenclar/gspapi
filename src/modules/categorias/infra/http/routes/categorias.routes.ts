@@ -12,7 +12,7 @@ categoriaRouter.post(
     [Segments.BODY]: {
       titulo: Joi.string().required(),
       slug: Joi.string().required(),
-      categoria_id: Joi.string().required(),
+      categoria_id: Joi.number(),
     },
   }),
   categoriasController.create,
