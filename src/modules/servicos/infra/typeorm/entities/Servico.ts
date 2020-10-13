@@ -17,7 +17,7 @@ class Servico {
   @Column()
   slug: string;
 
-  @Column()
+  @Column('text')
   informacao: string;
 
   @CreateDateColumn()
