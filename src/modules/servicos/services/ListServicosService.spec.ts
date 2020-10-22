@@ -1,32 +1,32 @@
-import FakeCategoriasRepository from '@modules/categorias/repositories/fakes/FakeCategoriasRepository';
+import FakeServicosRepository from '@modules/servicos/repositories/fakes/FakeServicosRepository';
 // import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
-import ListProviderService from './ListCategoriasService';
+import ListProviderService from './ListServicosService';
 
-let fakeCategoriasRepository: FakeCategoriasRepository;
+let fakeServicosRepository: FakeServicosRepository;
 // let fakeCacheProvider: FakeCacheProvider;
 let listProviders: ListProviderService;
 
 describe('ListProviderService', () => {
   beforeEach(() => {
-    fakeCategoriasRepository = new FakeCategoriasRepository();
+    fakeServicosRepository = new FakeServicosRepository();
     //  fakeCacheProvider = new FakeCacheProvider();
-    listProviders = new ListProviderService(fakeCategoriasRepository);
+    listProviders = new ListProviderService(fakeServicosRepository);
   });
 
   // fakeCacheProvider,
   it('should not be able to List the providers', async () => {
-    const categoria1 = await fakeCategoriasRepository.create({
+    const servico1 = await fakeServicosRepository.create({
       titulo: 'Jhon doe',
       slug: 'Jhon doe',
-      categoria_id: '123',
+      informacao: 'informacao',
     });
-    const categoria2 = await fakeCategoriasRepository.create({
+    const servico2 = await fakeServicosRepository.create({
       titulo: 'Jhon doe',
       slug: 'Jhon doe',
-      categoria_id: '123',
+      informacao: 'informacao',
     });
 
     const providers = await listProviders.execute();
-    expect(providers).toEqual([categoria1, categoria2]);
+    expect(providers).toEqual([servico1, servico2]);
   });
 });

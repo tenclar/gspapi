@@ -12,7 +12,7 @@ servicoRouter.post(
     [Segments.BODY]: {
       titulo: Joi.string().required(),
       slug: Joi.string().required(),
-      servico_id: Joi.string().required(),
+      informacao: Joi.string().required(),
     },
   }),
   servicosController.create,

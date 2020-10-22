@@ -1,20 +1,20 @@
 import { injectable, inject } from 'tsyringe';
 
-import Categoria from '@modules/categorias/infra/typeorm/entities/Categoria';
-import ICategoriasRepository from '@modules/categorias/repositories/ICategoriasRepository';
+import Servicos from '@modules/servicos/infra/typeorm/entities/Servico';
+import IServicosRepository from '@modules/servicos/repositories/IServicosRepository';
 // import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 
 interface IRequest {
-  categoria_id: string;
+  servico_id: string;
 }
 @injectable()
 class ListProviderService {
   constructor(
-    @inject('CategoriasRepository')
-    private categoriasRepository: ICategoriasRepository, // @inject('CacheProvider') // private cacheProvider: ICacheProvider,
+    @inject('ServicosRepository')
+    private servicosRepository: IServicosRepository, // @inject('CacheProvider') // private cacheProvider: ICacheProvider,
   ) {}
 
-  public async execute(): Promise<Categoria[]> {
+  public async execute(): Promise<Servicos[]> {
     /*
     let categorias = await this.cacheProvider.recover<Categoria[]>(
       `providers-list:${categoria_id}`,
@@ -23,12 +23,12 @@ class ListProviderService {
      */
 
     // if (!categorias) {
-    const categorias = await this.categoriasRepository.findAll();
+    const servicos = await this.servicosRepository.findAll();
 
     // await this.cacheProvider.save(`providers-list:${categoria_id}`, categorias);
     // }
 
-    return categorias;
+    return servicos;
   }
 }
 

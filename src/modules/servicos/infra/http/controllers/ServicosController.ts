@@ -7,12 +7,12 @@ import ListServicoService from '@modules/servicos/services/ListServicosService';
 
 export default class ServicosController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { titulo, servico_id } = request.body;
+    const { titulo, informacao } = request.body;
 
     const createServico = container.resolve(CreateServicoService);
     const servico = await createServico.execute({
       titulo,
-      servico_id,
+      informacao,
     });
 
     return response.json({ servico: classToClass(servico) });
