@@ -1,4 +1,4 @@
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, IsNull } from 'typeorm';
 import ICategoriasRepository from '@modules/categorias/repositories/ICategoriasRepository';
 import ICreateCategoriaDTO from '@modules/categorias/dtos/ICreateCategoriaDTO';
 import Categoria from '../entities/Categoria';
@@ -22,8 +22,37 @@ class CategoriasRepository implements ICategoriasRepository {
     return categoria;
   }
 
+  async findAlls(): Promise<Categoria[]> {
+    const listacategorias = await this.ormRepository.find({
+      where: { categoria_id: null },
+      relations: ['categorias'],
+      order: { titulo: 'ASC' },
+    });
+    return listacategorias;
+  }
+
   async findAll(): Promise<Categoria[]> {
-    const categorias = await this.ormRepository.find();
+    const categorias = await this.ormRepository
+      .createQueryBuilder('categoria')
+      // .where('categoria.categoria_id IS NULL')
+      .innerJoinAndSelect('categoria.categorias', 'sub_categoria')
+      .groupBy('categoria.id')
+      .addGroupBy('categoria.categoria_id')
+      .addGroupBy('sub_categoria.id')
+      .getMany();
+
+    /*
+      const groupBy = (items, key) => items.reduce(
+        (result, item) => ({
+          ...result,
+          [item[key]]: [
+            ...(result[item[key]] || []),
+            item,
+          ],
+        }),
+        {},
+      );
+       */
     return categorias;
   }
 

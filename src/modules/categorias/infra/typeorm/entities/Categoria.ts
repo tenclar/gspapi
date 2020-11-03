@@ -6,12 +6,16 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity('categorias')
 class Categoria {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @Column({ nullable: true })
+  categoria_id: string;
 
   @Column()
   titulo: string;
@@ -23,8 +27,8 @@ class Categoria {
   @JoinColumn({ name: 'categoria_id' })
   categoria: Categoria;
 
-  @Column()
-  categoria_id: string;
+  @OneToMany(() => Categoria, cat => cat.categoria)
+  categorias: Categoria[];
 
   @CreateDateColumn()
   created_at: Date;
