@@ -22,16 +22,12 @@ class CategoriasRepository implements ICategoriasRepository {
     return categoria;
   }
 
-  async findAlls(): Promise<Categoria[]> {
-    const listacategorias = await this.ormRepository.find({
-      where: { categoria_id: null },
-      relations: ['categorias'],
-      order: { titulo: 'ASC' },
-    });
+  async findAll(): Promise<Categoria[]> {
+    const listacategorias = await this.ormRepository.find();
     return listacategorias;
   }
 
-  async findAll(): Promise<Categoria[]> {
+  async findAllGroupBy(): Promise<Categoria[]> {
     const categorias = await this.ormRepository
       .createQueryBuilder('categoria')
       // .where('categoria.categoria_id IS NULL')
