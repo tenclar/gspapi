@@ -1,0 +1,37 @@
+const groupBy = (items: any, key: any) =>
+      items.reduce(
+        (result: any, item: any) => ({
+          ...result,
+          [item[key]]: [...(result[item[key]] || []), item],
+        }),
+        {},
+      );
+
+
+
+ const flatten = routes => {
+      return routes.reduce((acc, r) => {
+        if (r.categorias && r.categorias.length) {
+          acc = acc.concat(flatten(r.categorias));
+        } else {
+          acc.push(r);
+        }
+
+        return acc;
+      }, []);
+    };
+
+function getNestedChildren(arr, parent) {
+    var out = []
+    for(var i in arr) {
+        if(arr[i].parent == parent) {
+            var children = getNestedChildren(arr, arr[i].id)
+
+            if(children.length) {
+                arr[i].children = children
+            }
+            out.push(arr[i])
+        }
+    }
+    return out
+}
