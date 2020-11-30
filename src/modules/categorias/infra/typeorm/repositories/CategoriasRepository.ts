@@ -1,6 +1,7 @@
 import { Repository, getRepository } from 'typeorm';
 import ICategoriasRepository from '@modules/categorias/repositories/ICategoriasRepository';
 import ICreateCategoriaDTO from '@modules/categorias/dtos/ICreateCategoriaDTO';
+
 import Categoria from '../entities/Categoria';
 
 class CategoriasRepository implements ICategoriasRepository {
@@ -29,9 +30,41 @@ class CategoriasRepository implements ICategoriasRepository {
 
   async findAll(): Promise<Categoria[]> {
     const listacategorias = await this.ormRepository.find({
-      relations: ['categorias'],
+      // relations: ['categorias'],
     });
-    return listacategorias;
+
+    function getNestedChildren(arr, parent, cont) {
+      const out = [];
+      for (const i in arr) {
+        if (arr[i].categoria_id === parent) {
+          arr[i].titulo = `${cont}---${arr[i].titulo}`;
+          console.log(cont);
+          cont++;
+          const subcategorias = getNestedChildren(arr, arr[i].id, cont);
+
+          if (subcategorias.length) {
+            arr[i].subcategorias = subcategorias;
+          }
+
+          /*  if (cont > 0) {
+            let c = 0;
+
+            while (c < cont) {
+              console.log(`contador ${c}`);
+              arr[i].titulo = `${cont}---${arr[i].titulo}`;
+              c++;
+            }
+          } */
+
+          out.push(arr[i]);
+        }
+      }
+      return out;
+    }
+
+    const lista = getNestedChildren(listacategorias, null, 0);
+
+    return lista;
   }
 
   async findAlls(): Promise<Categoria[]> {

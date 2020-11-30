@@ -20,6 +20,38 @@ const groupBy = (items: any, key: any) =>
         return acc;
       }, []);
     };
+function flattenDeep(arr1) {
+      return arr1.reduce(
+        (acc, val) =>
+          Array.isArray(val) ? acc.concat(flattenDeep(val)) : acc.concat(val),
+        [],
+      );
+    }
+
+
+function flatDeep(arr, d) {
+      return d > 0
+        ? arr.reduce(
+            (acc, val) =>
+              acc.concat(Array.isArray(val) ? flatDeep(val, d - 1) : val),
+            [],
+          )
+        : arr.slice();
+    }
+
+function transformToTree(arr){
+    var nodes = {};
+    return arr.filter(function(obj){
+        var id = obj["name"],
+            parentId = obj["parent"];
+
+        nodes[id] = Object.assign(obj, nodes[id], { children: [] });
+        parentId && (nodes[parentId] = (nodes[parentId] || { children: [] }))["children"].push(obj);
+
+        return !parentId;
+    });
+}
+
 
 function getNestedChildren(arr, parent) {
     var out = []
