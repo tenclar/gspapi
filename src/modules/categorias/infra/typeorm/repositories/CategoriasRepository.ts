@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import { Repository, getRepository } from 'typeorm';
 import ICategoriasRepository from '@modules/categorias/repositories/ICategoriasRepository';
 import ICreateCategoriaDTO from '@modules/categorias/dtos/ICreateCategoriaDTO';
@@ -35,36 +36,38 @@ class CategoriasRepository implements ICategoriasRepository {
 
     function getNestedChildren(arr, parent, cont) {
       const out = [];
+      cont += 1;
       for (const i in arr) {
         if (arr[i].categoria_id === parent) {
-          arr[i].titulo = `${cont}---${arr[i].titulo}`;
-          console.log(cont);
-          cont++;
+          // arr[i].titulo = `${cont}---${arr[i].titulo}`;
+
           const subcategorias = getNestedChildren(arr, arr[i].id, cont);
 
-          if (subcategorias.length) {
-            arr[i].subcategorias = subcategorias;
+          if (cont > 0) {
+            const c = 0;
+            while (c < cont) {
+              arr[i].titulo = `---${arr[i].titulo}`;
+              // arr[i].titulo = `-${arr[i].titulo}`;
+
+              c += 1;
+            }
           }
 
-          /*  if (cont > 0) {
-            let c = 0;
-
-            while (c < cont) {
-              console.log(`contador ${c}`);
-              arr[i].titulo = `${cont}---${arr[i].titulo}`;
-              c++;
-            }
-          } */
-
           out.push(arr[i]);
+          if (subcategorias.length) {
+            // arr[i].subcategorias = subcategorias;
+            subcategorias.forEach(dd => {
+              out.push(dd);
+            });
+          }
         }
       }
       return out;
     }
 
-    const lista = getNestedChildren(listacategorias, null, 0);
-
+    const lista = getNestedChildren(listacategorias, null, -1);
     return lista;
+    // return listacategorias;
   }
 
   async findAlls(): Promise<Categoria[]> {

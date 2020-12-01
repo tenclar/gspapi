@@ -67,3 +67,23 @@ function getNestedChildren(arr, parent) {
     }
     return out
 }
+
+
+export default function (data: any) {
+  // const categorias = [];
+  const subcategorias = [];
+
+  function buildTree(item: any) {
+    const children = data.filter(child => child.ca === item.id);
+    if (children.length > 0) {
+      children.map(buildTree).forEach();
+    }
+    return children;
+  }
+
+  const firstLevel = data.filter(item => !item.ca);
+  const getFirstList = firstLevel.map(buildTree);
+  getFirstList.forEach(cat => subcategorias.push(cat));
+
+
+}
