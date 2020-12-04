@@ -87,3 +87,13 @@ export default function (data: any) {
 
 
 }
+
+
+function getCategoriasSubcategorias(categories: ICategorias[]) {
+      const categoriesWithSubcategories = categories.map(category => ({
+        ...category,
+        subcategory: categories.filter(c => c.id === category.categoria_id),
+      }));
+
+      return categoriesWithSubcategories;
+    }
