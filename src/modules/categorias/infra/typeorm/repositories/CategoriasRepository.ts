@@ -5,6 +5,16 @@ import ICreateCategoriaDTO from '@modules/categorias/dtos/ICreateCategoriaDTO';
 
 import Categoria from '../entities/Categoria';
 
+interface ICategorias {
+  id: string;
+  categoria_id: string | null;
+  titulo: string;
+  slug: string;
+  created_at: string;
+  updated_at: string;
+  subcategory: [];
+}
+
 class CategoriasRepository implements ICategoriasRepository {
   private ormRepository: Repository<Categoria>;
 
@@ -65,9 +75,19 @@ class CategoriasRepository implements ICategoriasRepository {
       return out;
     }
 
-    const lista = getNestedChildren(listacategorias, null, -1);
-    return lista;
-    // return listacategorias;
+    // const lista = getNestedChildren(listacategorias, null, -1);
+    // return lista;
+
+    function getCategoriasSubcategorias(categories: ICategorias[]) {
+      const categoriesWithSubcategories = categories.map(category => ({
+        ...category,
+        subcategory: categories.filter(c => c.id === category.categoria_id),
+      }));
+
+      return categoriesWithSubcategories;
+    }
+
+    return listacategorias;
   }
 
   async findAlls(): Promise<Categoria[]> {
