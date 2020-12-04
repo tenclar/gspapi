@@ -21,10 +21,10 @@ class CreateCategoriaService {
       titulo,
     );
 
-    if (checkCategoriaExists) {
-      throw new AppError('Titulo already used.');
+    /*  if (checkCategoriaExists) {
+     throw new AppError('Titulo already used.');
     }
-
+ */
     const categoria = await this.categoriasRepository.create({
       titulo,
       slug: slug(titulo),
