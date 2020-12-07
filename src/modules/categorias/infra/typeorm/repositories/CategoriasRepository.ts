@@ -75,19 +75,8 @@ class CategoriasRepository implements ICategoriasRepository {
       return out;
     }
 
-    // const lista = getNestedChildren(listacategorias, null, -1);
-    // return lista;
-
-    function getCategoriasSubcategorias(categories: ICategorias[]) {
-      const categoriesWithSubcategories = categories.map(category => ({
-        ...category,
-        subcategory: categories.filter(c => c.id === category.categoria_id),
-      }));
-
-      return categoriesWithSubcategories;
-    }
-
-    return listacategorias;
+    const lista = getNestedChildren(listacategorias, null, -1);
+    return lista;
   }
 
   async findAlls(): Promise<Categoria[]> {
