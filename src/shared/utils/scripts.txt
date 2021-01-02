@@ -69,6 +69,43 @@ function getNestedChildren(arr, parent) {
 }
 
 
+
+ function getNestedChildren(arr, parent, cont) {
+      const out = [];
+      cont += 1;
+      for (const i in arr) {
+        if (arr[i].categoria_id === parent) {
+          // arr[i].titulo = `${cont}---${arr[i].titulo}`;
+
+          const subcategorias = getNestedChildren(arr, arr[i].id, cont);
+
+          if (cont > 0) {
+            const c = 0;
+            while (c < cont) {
+              arr[i].titulo = `---${arr[i].titulo}`;
+              // arr[i].titulo = `-${arr[i].titulo}`;
+
+              c += 1;
+            }
+          }
+
+          out.push(arr[i]);
+          if (subcategorias.length) {
+            // arr[i].subcategorias = subcategorias;
+            subcategorias.forEach(dd => {
+              out.push(dd);
+            });
+          }
+        }
+      }
+      return out;
+    }
+
+    const lista = getNestedChildren(listacategorias, null, -1);
+    return lista;
+  }
+
+
 export default function (data: any) {
   // const categorias = [];
   const subcategorias = [];
@@ -99,7 +136,7 @@ function getCategoriasSubcategorias(categories: ICategorias[]) {
     }
 
 
-  /*
+
        for (const i in arr) {
         if (arr[i].categoria_id === parent) {
           const subcategorias = getNestedChildren(arr, arr[i].id, cont);
@@ -121,4 +158,4 @@ function getCategoriasSubcategorias(categories: ICategorias[]) {
           }
         }
       }
-       */
+

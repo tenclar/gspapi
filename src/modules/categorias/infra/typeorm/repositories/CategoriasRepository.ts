@@ -54,8 +54,6 @@ class CategoriasRepository implements ICategoriasRepository {
 
       arr.forEach(elem => {
         if (elem.categoria_id === parent) {
-          const subcategorias = getNestedChildren(arr, elem.id, cont);
-
           const categoria = elem;
           if (cont > 0) {
             let c = 0;
@@ -65,8 +63,9 @@ class CategoriasRepository implements ICategoriasRepository {
               c += 1;
             }
           }
-
           out.push(elem);
+          const subcategorias = getNestedChildren(arr, elem.id, cont);
+
           if (subcategorias.length) {
             subcategorias.forEach(subc => {
               out.push(subc);
