@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 import { Repository, getRepository } from 'typeorm';
 import ICategoriasRepository from '@modules/categorias/repositories/ICategoriasRepository';
 import ICreateCategoriaDTO from '@modules/categorias/dtos/ICreateCategoriaDTO';
@@ -44,34 +43,38 @@ class CategoriasRepository implements ICategoriasRepository {
       // relations: ['categorias'],
     });
 
-    function getNestedChildren(arr, parent, cont) {
-      const out = [];
+    function getNestedChildren(
+      arr: Categoria[],
+      parent: string | null,
+      prof: number,
+    ) {
+      const out: Categoria[] = [];
+      let cont = prof;
       cont += 1;
-      for (const i in arr) {
-        if (arr[i].categoria_id === parent) {
-          // arr[i].titulo = `${cont}---${arr[i].titulo}`;
 
-          const subcategorias = getNestedChildren(arr, arr[i].id, cont);
+      arr.forEach(elem => {
+        if (elem.categoria_id === parent) {
+          const subcategorias = getNestedChildren(arr, elem.id, cont);
 
+          const categoria = elem;
           if (cont > 0) {
-            const c = 0;
+            let c = 0;
             while (c < cont) {
-              arr[i].titulo = `---${arr[i].titulo}`;
-              // arr[i].titulo = `-${arr[i].titulo}`;
+              categoria.titulo = `---${categoria.titulo}`;
 
               c += 1;
             }
           }
 
-          out.push(arr[i]);
+          out.push(elem);
           if (subcategorias.length) {
-            // arr[i].subcategorias = subcategorias;
-            subcategorias.forEach(dd => {
-              out.push(dd);
+            subcategorias.forEach(subc => {
+              out.push(subc);
             });
           }
         }
-      }
+      });
+
       return out;
     }
 
@@ -93,18 +96,6 @@ class CategoriasRepository implements ICategoriasRepository {
 
       .getMany();
 
-    /*
-      const groupBy = (items, key) => items.reduce(
-        (result, item) => ({
-          ...result,
-          [item[key]]: [
-            ...(result[item[key]] || []),
-            item,
-          ],
-        }),
-        {},
-      );
-       */
     return categorias;
   }
 
