@@ -4,7 +4,12 @@ Guia de Serviços Públicos
 ### 🔽 Requisitos
 1. Ter o NodeJs e Yarn instalado
 2. Ter banco de dados PostgreSQL em execução , pode ser com docker
-3. comando gerar container posgre: docker run --name posrgresdb -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+3. comando gerar container posgre: docker run --name postgresdb -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres:11
+4. docker start postgresdb
+5. docker exec -it postgresdb psql -U postgres
+6. CREATE ROLE gspuser PASSWORD 'F0IC77w!' SUPERUSER CREATEDB CREATEROLE INHERIT LOGIN;
+7. CREATE DATABASE gspdb
+
 
 ### :rocket: Iniciando com o backend
 1. ``cd gspapi``
