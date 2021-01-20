@@ -19,7 +19,7 @@ Guia de Serviços Públicos
 5. ``yarn dev:server | iniciar projeto``
 
 ### 💻 Iniciando com o Front-end
-1. `` git clone http://gitlab.acre.gov.br/oca/gspweb``
+1. `` git clone http://gitgub.com/tenclar/gspweb``
 2. ``cd gspweb``
 3. ``yarn``
 4. ``yarn start``
