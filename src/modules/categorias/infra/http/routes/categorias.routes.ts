@@ -16,7 +16,16 @@ categoriaRouter.post(
   }),
   categoriasController.create,
 );
-
+categoriaRouter.put(
+  '/',
+  celebrate({
+    [Segments.BODY]: {
+      titulo: Joi.string().required(),
+      categoria_id: Joi.string(),
+    },
+  }),
+  categoriasController.update,
+);
 categoriaRouter.get('/', categoriasController.index);
 
 export default categoriaRouter;

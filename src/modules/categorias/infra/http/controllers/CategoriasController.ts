@@ -18,6 +18,14 @@ export default class CategoriasController {
     return response.json({ categoria: classToClass(categoria) });
   }
 
+  public async show(request: Request, response: Response): Promise<Response> {
+    const user_id = request.user.id;
+
+    const showProfile = container.resolve(ShowProfileService);
+    const user = await showProfile.execute({ user_id });
+    return response.json({ user: classToClass(user) });
+  }
+  
   public async index(request: Request, response: Response): Promise<Response> {
     const listCategorias = await container.resolve(ListCategoriaService);
     const categorias = await listCategorias.execute();
