@@ -18,6 +18,17 @@ class FakeCategoriasRepository implements ICategoriasRepository {
     return categoriaFind;
   }
 
+  async findByTituloAndId(
+    titulo: string,
+    categoria_id: string,
+  ): Promise<Categoria | undefined> {
+    const categoriaFind = this.categorias.find(
+      u => u.titulo === titulo && u.categoria_id === categoria_id,
+    );
+
+    return categoriaFind;
+  }
+
   public async findAll(): Promise<Categoria[]> {
     const { categorias } = this;
     return categorias;

@@ -33,6 +33,16 @@ class CategoriasRepository implements ICategoriasRepository {
     return categoria;
   }
 
+  async findByTituloAndId(
+    titulo: string,
+    id: string,
+  ): Promise<Categoria | undefined> {
+    const categoria = await this.ormRepository.findOne({
+      where: { titulo, id },
+    });
+    return categoria;
+  }
+
   async findAllss(): Promise<Categoria[]> {
     const listacategorias = await this.ormRepository.find();
     return listacategorias;

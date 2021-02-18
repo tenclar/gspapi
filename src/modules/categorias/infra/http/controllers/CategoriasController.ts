@@ -3,6 +3,8 @@ import { classToClass } from 'class-transformer';
 import { container } from 'tsyringe';
 
 import CreateCategoriaService from '@modules/categorias/services/CreateCategoriasService';
+import ShowCategoriaService from '@modules/categorias/services/ShowCategoriasService';
+import UpdateCategoriaService from '@modules/categorias/services/UpdateCategoriasService';
 import ListCategoriaService from '@modules/categorias/services/ListCategoriasService';
 
 export default class CategoriasController {
@@ -19,16 +21,30 @@ export default class CategoriasController {
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
-    const user_id = request.user.id;
+    const { id } = request.params;
 
-    const showProfile = container.resolve(ShowProfileService);
-    const user = await showProfile.execute({ user_id });
-    return response.json({ user: classToClass(user) });
+    const showCategoria = container.resolve(ShowCategoriaService);
+    const categoria = await showCategoria.execute({ id });
+    return response.json({ user: classToClass(categoria) });
   }
-  
+
   public async index(request: Request, response: Response): Promise<Response> {
     const listCategorias = await container.resolve(ListCategoriaService);
     const categorias = await listCategorias.execute();
     return response.json({ categorias: classToClass(categorias) });
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    // const { id } = request.params;
+    const { id, titulo, categoria_id } = request.body;
+    const updateCategoria = container.resolve(UpdateCategoriaService);
+
+    const user = await updateCategoria.execute({
+      id,
+      titulo,
+      categoria_id,
+    });
+    // delete user.password;
+    return response.json({ user: classToClass(user) });
   }
 }

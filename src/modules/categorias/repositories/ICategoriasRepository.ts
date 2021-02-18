@@ -6,5 +6,6 @@ export default interface ICategoriasReposotory {
   save(categoria: Categoria): Promise<Categoria>;
   findById(id: string): Promise<Categoria | undefined>;
   findByTitulo(titulo: string): Promise<Categoria | undefined>;
+  findByTituloAndId(titulo: string, id: string): Promise<Categoria | undefined>;
   findAll(): Promise<Categoria[]>;
 }

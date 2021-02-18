@@ -20,6 +20,7 @@ categoriaRouter.put(
   '/',
   celebrate({
     [Segments.BODY]: {
+      id: Joi.string().required(),
       titulo: Joi.string().required(),
       categoria_id: Joi.string(),
     },
@@ -28,4 +29,13 @@ categoriaRouter.put(
 );
 categoriaRouter.get('/', categoriasController.index);
 
+categoriaRouter.get(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  categoriasController.show,
+);
 export default categoriaRouter;
