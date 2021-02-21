@@ -21,6 +21,9 @@ import OrgaosRepository from '@modules/orgaos/infra/typeorm/repositories/OrgaosR
 import ISuperioresRepository from '@modules/superiores/repositories/ISuperioresRepository';
 import SuperioresRepository from '@modules/superiores/infra/typeorm/repositories/SuperioresRepository';
 
+import ILocalRepository from '@modules/local/repositories/ILocalRepository';
+import LocalRepository from '@modules/local/infra/typeorm/repositories/LocalRepository';
+
 import IServicosRepository from '@modules/servicos/repositories/IServicosRepository';
 import ServicosRepository from '@modules/servicos/infra/typeorm/repositories/ServicosRepository';
 
@@ -54,6 +57,10 @@ container.registerSingleton<ISuperioresRepository>(
   SuperioresRepository,
 );
 
+container.registerSingleton<ILocalRepository>(
+  'LocalRepository',
+  LocalRepository,
+);
 container.registerSingleton<IServicosRepository>(
   'ServicosRepository',
   ServicosRepository,
