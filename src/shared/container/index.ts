@@ -12,6 +12,9 @@ import UserTokensRepository from '@modules/users/infra/typeorm/repositories/User
 import ICategoriasRepository from '@modules/categorias/repositories/ICategoriasRepository';
 import CategoriasRepository from '@modules/categorias/infra/typeorm/repositories/CategoriasRepository';
 
+import ICidadesRepository from '@modules/cidades/repositories/ICidadesRepository';
+import CidadesRepository from '@modules/cidades/infra/typeorm/repositories/CidadesRepository';
+
 import IServicosRepository from '@modules/servicos/repositories/IServicosRepository';
 import ServicosRepository from '@modules/servicos/infra/typeorm/repositories/ServicosRepository';
 
@@ -28,6 +31,11 @@ container.registerSingleton<IUserTokensRepository>(
 container.registerSingleton<ICategoriasRepository>(
   'CategoriasRepository',
   CategoriasRepository,
+);
+
+container.registerSingleton<ICidadesRepository>(
+  'CidadesRepository',
+  CidadesRepository,
 );
 
 container.registerSingleton<IServicosRepository>(
