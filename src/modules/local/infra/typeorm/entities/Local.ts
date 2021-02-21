@@ -10,7 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('local')
+@Entity('locais')
 class Local {
   @PrimaryGeneratedColumn('uuid')
   id: string;
