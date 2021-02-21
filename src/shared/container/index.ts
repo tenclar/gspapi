@@ -18,6 +18,9 @@ import CidadesRepository from '@modules/cidades/infra/typeorm/repositories/Cidad
 import IOrgaosRepository from '@modules/orgaos/repositories/IOrgaosRepository';
 import OrgaosRepository from '@modules/orgaos/infra/typeorm/repositories/OrgaosRepository';
 
+import ISuperioresRepository from '@modules/superiores/repositories/ISuperioresRepository';
+import SuperioresRepository from '@modules/superiores/infra/typeorm/repositories/SuperioresRepository';
+
 import IServicosRepository from '@modules/servicos/repositories/IServicosRepository';
 import ServicosRepository from '@modules/servicos/infra/typeorm/repositories/ServicosRepository';
 
@@ -44,6 +47,11 @@ container.registerSingleton<ICidadesRepository>(
 container.registerSingleton<IOrgaosRepository>(
   'OrgaosRepository',
   OrgaosRepository,
+);
+
+container.registerSingleton<ISuperioresRepository>(
+  'SuperioresRepository',
+  SuperioresRepository,
 );
 
 container.registerSingleton<IServicosRepository>(
