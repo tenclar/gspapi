@@ -16,16 +16,16 @@ class ListProviderService {
 
   public async execute(): Promise<Servicos[]> {
     /*
-    let categorias = await this.cacheProvider.recover<Categoria[]>(
-      `providers-list:${categoria_id}`,
+    let servicos = await this.cacheProvider.recover<Servico[]>(
+      `providers-list:${servico_id}`,
     );
 
      */
 
-    // if (!categorias) {
+    // if (!servicos) {
     const servicos = await this.servicosRepository.findAll();
 
-    // await this.cacheProvider.save(`providers-list:${categoria_id}`, categorias);
+    // await this.cacheProvider.save(`providers-list:${servico_id}`, servicos);
     // }
 
     return servicos;

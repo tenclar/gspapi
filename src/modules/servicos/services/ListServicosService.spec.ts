@@ -16,14 +16,18 @@ describe('ListProviderService', () => {
   // fakeCacheProvider,
   it('should not be able to List the providers', async () => {
     const servico1 = await fakeServicosRepository.create({
-      titulo: 'Jhon doe',
-      slug: 'Jhon doe',
+      titulo: 'Titulo 1',
+      slug: 'titulo-1',
       informacao: 'informacao',
+      orgao_id: '1',
+      categoria_id: '1',
     });
     const servico2 = await fakeServicosRepository.create({
-      titulo: 'Jhon doe',
-      slug: 'Jhon doe',
-      informacao: 'informacao',
+      titulo: 'Titulo 2',
+      slug: 'titulo-2',
+      informacao: 'informacao2',
+      orgao_id: '2',
+      categoria_id: '2',
     });
 
     const providers = await listProviders.execute();

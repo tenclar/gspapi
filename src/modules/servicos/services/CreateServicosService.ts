@@ -1,6 +1,6 @@
 import Servico from '@modules/servicos/infra/typeorm/entities/Servico';
 import AppError from '@shared/errors/AppError';
-
+import slug from '@shared/utils/slug';
 import { injectable, inject } from 'tsyringe';
 // import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 import IServicosRepository from '../repositories/IServicosRepository';
@@ -8,6 +8,8 @@ import IServicosRepository from '../repositories/IServicosRepository';
 interface IRequest {
   titulo: string;
   informacao: string;
+  orgao_id: string;
+  categoria_id: string;
 }
 @injectable()
 class CreateServicoService {
@@ -16,7 +18,12 @@ class CreateServicoService {
     private servicosRepository: IServicosRepository,
   ) {}
 
-  public async execute({ titulo, informacao }: IRequest): Promise<Servico> {
+  public async execute({
+    titulo,
+    informacao,
+    categoria_id,
+    orgao_id,
+  }: IRequest): Promise<Servico> {
     const checkServicoExists = await this.servicosRepository.findByTitulo(
       titulo,
     );
@@ -27,8 +34,10 @@ class CreateServicoService {
 
     const servico = await this.servicosRepository.create({
       titulo,
-      slug: titulo,
+      slug: slug(titulo),
       informacao,
+      orgao_id,
+      categoria_id,
     });
     await this.servicosRepository.save(servico);
     // await this.cacheProvider.invalidatePrefix('providers-list:*');

@@ -23,8 +23,9 @@ describe('CreateServico', () => {
   it('should be able to create a new servico', async () => {
     const servico = await createServicos.execute({
       titulo: 'Titulo 1',
-
       informacao: 'informacao',
+      orgao_id: '1',
+      categoria_id: '1',
     });
 
     expect(servico).toHaveProperty('id');
@@ -33,13 +34,17 @@ describe('CreateServico', () => {
   it('should not be able to create servico with  titulo match', async () => {
     await createServicos.execute({
       titulo: 'Titulo 1',
-      informacao: '12',
+      informacao: 'dados do servico',
+      orgao_id: '1',
+      categoria_id: '1',
     });
 
     expect(
       createServicos.execute({
         titulo: 'Titulo 1',
-        informacao: '12',
+        informacao: 'dados do servico',
+        orgao_id: '1',
+        categoria_id: '1',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
