@@ -20,4 +20,26 @@ servicoRouter.post(
 
 servicoRouter.get('/', servicosController.index);
 
+servicoRouter.put(
+  '/',
+  celebrate({
+    [Segments.BODY]: {
+      id: Joi.string().required(),
+      nome: Joi.string().required(),
+    },
+  }),
+  servicosController.update,
+);
+servicoRouter.get('/', servicosController.index);
+
+servicoRouter.get(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  servicosController.show,
+);
+
 export default servicoRouter;
