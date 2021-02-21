@@ -11,12 +11,12 @@ interface IRequest {
 @injectable()
 class ShowProfileService {
   constructor(
-    @inject('CategoriaRepository')
-    private categoriaRepository: ICategoriaRepository,
+    @inject('CategoriasRepository')
+    private categoriasRepository: ICategoriaRepository,
   ) {}
 
   public async execute({ id }: IRequest): Promise<Categoria> {
-    const categoria = await this.categoriaRepository.findById(id);
+    const categoria = await this.categoriasRepository.findById(id);
     if (!categoria) {
       throw new AppError('Categoria not Found');
     }
