@@ -15,6 +15,9 @@ import CategoriasRepository from '@modules/categorias/infra/typeorm/repositories
 import ICidadesRepository from '@modules/cidades/repositories/ICidadesRepository';
 import CidadesRepository from '@modules/cidades/infra/typeorm/repositories/CidadesRepository';
 
+import IOrgaosRepository from '@modules/orgaos/repositories/IOrgaosRepository';
+import OrgaosRepository from '@modules/orgaos/infra/typeorm/repositories/OrgaosRepository';
+
 import IServicosRepository from '@modules/servicos/repositories/IServicosRepository';
 import ServicosRepository from '@modules/servicos/infra/typeorm/repositories/ServicosRepository';
 
@@ -36,6 +39,11 @@ container.registerSingleton<ICategoriasRepository>(
 container.registerSingleton<ICidadesRepository>(
   'CidadesRepository',
   CidadesRepository,
+);
+
+container.registerSingleton<IOrgaosRepository>(
+  'OrgaosRepository',
+  OrgaosRepository,
 );
 
 container.registerSingleton<IServicosRepository>(
