@@ -1,10 +1,15 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
-export default class CreateServicos1596343541413 implements MigrationInterface {
+export default class CreateOrgaos1613792854346 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'servicos',
+        name: 'orgaos',
         columns: [
           {
             name: 'id',
@@ -13,22 +18,20 @@ export default class CreateServicos1596343541413 implements MigrationInterface {
             generationStrategy: 'uuid',
             default: 'uuid_generate_v4()',
           },
-
           {
-            name: 'titulo',
-            type: 'varchar',
+            name: 'superiores_id',
+            type: 'uuid',
             isNullable: false,
           },
 
+          {
+            name: 'nome',
+            type: 'varchar',
+            isNullable: false,
+          },
           {
             name: 'slug',
             type: 'varchar',
-            isNullable: false,
-          },
-
-          {
-            name: 'informacao',
-            type: 'text',
             isNullable: false,
           },
 
@@ -45,9 +48,22 @@ export default class CreateServicos1596343541413 implements MigrationInterface {
         ],
       }),
     );
+
+    await queryRunner.createForeignKey(
+      'orgaos',
+      new TableForeignKey({
+        name: 'superioresfk',
+        columnNames: ['superiores_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'instituicoes_superiores',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      }),
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('servicos');
+    await queryRunner.dropForeignKey('orgaos', 'superioresfk');
+    await queryRunner.dropTable('orgaos');
   }
 }

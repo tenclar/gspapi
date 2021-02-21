@@ -1,10 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateServicos1596343541413 implements MigrationInterface {
+export default class CreateInstituicoesSuperiores1613792735675
+  implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'servicos',
+        name: 'instituicoes_superiores',
         columns: [
           {
             name: 'id',
@@ -13,22 +14,14 @@ export default class CreateServicos1596343541413 implements MigrationInterface {
             generationStrategy: 'uuid',
             default: 'uuid_generate_v4()',
           },
-
           {
-            name: 'titulo',
+            name: 'nome',
             type: 'varchar',
             isNullable: false,
           },
-
           {
             name: 'slug',
             type: 'varchar',
-            isNullable: false,
-          },
-
-          {
-            name: 'informacao',
-            type: 'text',
             isNullable: false,
           },
 
@@ -48,6 +41,6 @@ export default class CreateServicos1596343541413 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('servicos');
+    await queryRunner.dropTable('instituicoes_superiores');
   }
 }

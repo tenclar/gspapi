@@ -5,12 +5,12 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class CreateServicosCategorias1596343962892
+export default class CreateServicosEtapas1613852654397
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'servicos_categorias',
+        name: 'servicos_etapas',
         columns: [
           {
             name: 'id',
@@ -25,11 +25,21 @@ export default class CreateServicosCategorias1596343962892
             type: 'uuid',
             isNullable: false,
           },
+          {
+            name: 'titulo',
+            type: 'varchar',
+            isNullable: false,
+          },
 
           {
-            name: 'categoria_id',
-            type: 'uuid',
+            name: 'slug',
+            type: 'varchar',
             isNullable: false,
+          },
+
+          {
+            name: 'informacao',
+            type: 'text',
           },
 
           {
@@ -47,7 +57,7 @@ export default class CreateServicosCategorias1596343962892
     );
 
     await queryRunner.createForeignKey(
-      'servicos_categorias',
+      'servicos_etapas',
       new TableForeignKey({
         name: 'servicosfk',
         columnNames: ['servico_id'],
@@ -57,23 +67,10 @@ export default class CreateServicosCategorias1596343962892
         onUpdate: 'CASCADE',
       }),
     );
-
-    await queryRunner.createForeignKey(
-      'servicos_categorias',
-      new TableForeignKey({
-        name: 'categoriasfk',
-        columnNames: ['categoria_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'categorias',
-        onDelete: 'SET NULL',
-        onUpdate: 'CASCADE',
-      }),
-    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('servicos', 'servicosfk');
-    await queryRunner.dropForeignKey('categorias', 'categoriasfk');
-    await queryRunner.dropTable('servicos_categorias');
+    await queryRunner.dropForeignKey('servicos_etapas', 'servicosfk');
+    await queryRunner.dropTable('servicos_etapas');
   }
 }
