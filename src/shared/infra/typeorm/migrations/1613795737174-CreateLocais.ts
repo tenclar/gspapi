@@ -19,12 +19,12 @@ export default class CreateLocais1613795737174 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'cidades_id',
+            name: 'cidade_id',
             type: 'uuid',
             isNullable: false,
           },
           {
-            name: 'orgaos_id',
+            name: 'orgao_id',
             type: 'uuid',
             isNullable: false,
           },
@@ -56,7 +56,7 @@ export default class CreateLocais1613795737174 implements MigrationInterface {
       'locais',
       new TableForeignKey({
         name: 'cidadesfk',
-        columnNames: ['cidades_id'],
+        columnNames: ['cidade_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'cidades',
         onDelete: 'SET NULL',
@@ -67,7 +67,7 @@ export default class CreateLocais1613795737174 implements MigrationInterface {
       'locais',
       new TableForeignKey({
         name: 'orgaosfk',
-        columnNames: ['orgaos_id'],
+        columnNames: ['orgao_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'orgaos',
         onDelete: 'SET NULL',
