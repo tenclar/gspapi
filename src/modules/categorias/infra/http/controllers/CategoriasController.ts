@@ -25,7 +25,7 @@ export default class CategoriasController {
 
     const showCategoria = container.resolve(ShowCategoriaService);
     const categoria = await showCategoria.execute({ id });
-    return response.json({ user: classToClass(categoria) });
+    return response.json(classToClass(categoria));
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
@@ -45,6 +45,6 @@ export default class CategoriasController {
       categoria_id,
     });
     // delete user.password;
-    return response.json({ user: classToClass(user) });
+    return response.json({ categoria: classToClass(user) });
   }
 }
