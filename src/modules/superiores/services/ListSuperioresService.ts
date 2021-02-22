@@ -1,20 +1,20 @@
 import { injectable, inject } from 'tsyringe';
 
-import Cidade from '@modules/cidades/infra/typeorm/entities/Cidade';
-import ICidadesRepository from '@modules/cidades/repositories/ICidadesRepository';
+import Superiores from '@modules/superiores/infra/typeorm/entities/InstituicaoSuperior';
+import ISuperioresRepository from '@modules/superiores/repositories/ISuperioresRepository';
 
 @injectable()
-class ListCidadesService {
+class ListSuperioresService {
   constructor(
-    @inject('CidadesRepository')
-    private cidadesRepository: ICidadesRepository,
+    @inject('SuperioresRepository')
+    private superioresRepository: ISuperioresRepository,
   ) {}
 
-  public async execute(): Promise<Cidade[]> {
-    const cidades = await this.cidadesRepository.findAll();
+  public async execute(): Promise<Superiores[]> {
+    const superiores = await this.superioresRepository.findAll();
 
-    return cidades;
+    return superiores;
   }
 }
 
-export default ListCidadesService;
+export default ListSuperioresService;
