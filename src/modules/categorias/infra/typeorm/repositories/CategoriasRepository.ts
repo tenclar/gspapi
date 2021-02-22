@@ -1,4 +1,4 @@
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, Like } from 'typeorm';
 import ICategoriasRepository from '@modules/categorias/repositories/ICategoriasRepository';
 import ICreateCategoriaDTO from '@modules/categorias/dtos/ICreateCategoriaDTO';
 
@@ -41,6 +41,13 @@ class CategoriasRepository implements ICategoriasRepository {
       where: { titulo, id },
     });
     return categoria;
+  }
+
+  async findAllByTitulo(titulo: string): Promise<Categoria[]> {
+    const listacategorias = await this.ormRepository.find({
+      titulo: Like(`%${titulo}%`),
+    });
+    return listacategorias;
   }
 
   async findAllss(): Promise<Categoria[]> {

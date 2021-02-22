@@ -5,7 +5,7 @@ import ICategoriasRepository from '@modules/categorias/repositories/ICategoriasR
 // import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 
 interface IRequest {
-  categoria_id: string;
+  titulo: string;
 }
 @injectable()
 class ListProviderService {
