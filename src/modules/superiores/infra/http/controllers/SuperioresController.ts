@@ -28,7 +28,6 @@ export default class SuperioresController {
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    // const { id } = request.params;
     const { id, nome } = request.body;
     const updateSuperiores = container.resolve(UpdateSuperioresService);
 
