@@ -12,7 +12,7 @@ interface IRequest {
 @injectable()
 class CreateSuperioresService {
   constructor(
-    @inject('SuperioreRepository')
+    @inject('SuperioresRepository')
     private superioresRepository: ISuperioresRepository,
   ) {}
 
