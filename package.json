@@ -11,6 +11,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@types/nodemailer": "^6.4.0",
     "aws-sdk": "^2.713.0",
     "bcryptjs": "^2.4.3",
     "celebrate": "^12.1.1",

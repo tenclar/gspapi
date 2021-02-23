@@ -3,6 +3,7 @@ import { injectable, inject } from 'tsyringe';
 import IMailTemplateProvider from '@shared/container/providers/MailTemplateProvider/models/IMailTemplateProvider';
 import IMailProvider from '../models/IMailProvider';
 import ISendMailDTO from '../dtos/ISendMailDTO';
+
 @injectable()
 export default class EtherealMailProvider implements IMailProvider {
   private client: Transporter;
@@ -33,8 +34,8 @@ export default class EtherealMailProvider implements IMailProvider {
   }: ISendMailDTO): Promise<void> {
     const message = await this.client.sendMail({
       from: {
-        name: from?.name || 'Equipe GoBarber',
-        address: from?.email || 'equipe@gobarber.com.br',
+        name: from?.name || 'Equipe DETI',
+        address: from?.email || 'deti@ac.gov.br',
       },
       to: {
         name: to.name,

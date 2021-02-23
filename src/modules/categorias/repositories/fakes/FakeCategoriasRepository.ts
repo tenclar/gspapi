@@ -34,6 +34,12 @@ class FakeCategoriasRepository implements ICategoriasRepository {
     return categorias;
   }
 
+  public async findAllLikeTitulo(titulo: string): Promise<Categoria[]> {
+    const categorias = this.categorias.filter(u => u.titulo === titulo);
+
+    return categorias;
+  }
+
   async create(categoriaData: ICreateCategoriaDTO): Promise<Categoria> {
     const categoria = new Categoria();
     Object.assign(categoria, { id: uuid() }, categoriaData);
