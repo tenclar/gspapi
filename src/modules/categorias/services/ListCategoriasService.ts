@@ -8,13 +8,13 @@ interface IRequest {
   titulo: string;
 }
 @injectable()
-class ListProviderService {
+class ListCategoriasService {
   constructor(
     @inject('CategoriasRepository')
     private categoriasRepository: ICategoriasRepository, // @inject('CacheProvider') // private cacheProvider: ICacheProvider,
   ) {}
 
-  public async execute(): Promise<Categoria[]> {
+  public async execute({ titulo }: IRequest): Promise<Categoria[]> {
     /*
     let categorias = await this.cacheProvider.recover<Categoria[]>(
       `providers-list:${categoria_id}`,
@@ -23,7 +23,9 @@ class ListProviderService {
      */
 
     // if (!categorias) {
-    const categorias = await this.categoriasRepository.findAll();
+    const categorias = await this.categoriasRepository.findAllLikeTitulo(
+      titulo,
+    );
 
     // await this.cacheProvider.save(`providers-list:${categoria_id}`, categorias);
     // }
@@ -32,4 +34,4 @@ class ListProviderService {
   }
 }
 
-export default ListProviderService;
+export default ListCategoriasService;

@@ -29,8 +29,10 @@ export default class CategoriasController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
+    const { titulo = '%' } = request.query;
+
     const listCategorias = await container.resolve(ListCategoriaService);
-    const categorias = await listCategorias.execute();
+    const categorias = await listCategorias.execute({ titulo: String(titulo) });
     return response.json({ categorias: classToClass(categorias) });
   }
 
