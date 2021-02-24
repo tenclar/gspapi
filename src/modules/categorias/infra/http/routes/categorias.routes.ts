@@ -17,10 +17,12 @@ categoriaRouter.post(
   categoriasController.create,
 );
 categoriaRouter.put(
-  '/',
+  '/:id',
   celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
     [Segments.BODY]: {
-      id: Joi.string().required(),
       titulo: Joi.string().required(),
       categoria_id: Joi.string(),
     },
