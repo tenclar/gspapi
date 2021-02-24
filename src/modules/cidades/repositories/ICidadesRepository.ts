@@ -6,5 +6,6 @@ export default interface ICidadeRepository {
   save(cidade: Cidade): Promise<Cidade | undefined>;
   findById(id: string): Promise<Cidade | undefined>;
   findByNome(nome: string): Promise<Cidade | undefined>;
+  findAllLikeNome(nome: string): Promise<Cidade[]>;
   findAll(): Promise<Cidade[]>;
 }

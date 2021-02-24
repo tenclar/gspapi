@@ -1,4 +1,4 @@
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, Raw } from 'typeorm';
 import ICidadeRepository from '@modules/cidades/repositories/ICidadesRepository';
 import ICreateCidadeDTO from '@modules/cidades/dtos/ICreateCidadeDTO';
 
@@ -21,6 +21,14 @@ class CidadesRepository implements ICidadeRepository {
       where: { nome },
     });
     return cidade;
+  }
+
+
+  async findAllLikeNome(nome: string): Promise<Cidade[]> {
+    const listacategorias = await this.ormRepository.find({
+      where: { nome: Raw(alias => `${alias} ILIKE '%${nome}%'`) },
+    });
+    return listacategorias;
   }
 
   async findAll(): Promise<Cidade[]> {
