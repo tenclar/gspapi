@@ -24,7 +24,7 @@ export default class CidadeController {
   public async index(request: Request, response: Response): Promise<Response> {
     const { nome } = request.query;
     const listCidades = await container.resolve(ListCidadesService);
-    const cidades = await listCidades.execute({nome: String(nome)});
+    const cidades = await listCidades.execute({ nome: String(nome) });
     return response.json({ cidades: classToClass(cidades) });
   }
 
