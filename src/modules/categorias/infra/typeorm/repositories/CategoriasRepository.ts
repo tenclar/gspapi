@@ -22,7 +22,9 @@ class CategoriasRepository implements ICategoriasRepository {
   }
 
   async findById(id: string): Promise<Categoria | undefined> {
-    const categoria = await this.ormRepository.findOne(id);
+    const categoria = await this.ormRepository.findOne(id, {
+      relations: ['categoria'],
+    });
     return categoria;
   }
 
