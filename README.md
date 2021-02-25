@@ -15,7 +15,7 @@ Guia de Serviços Públicos
 1. ``cd gspapi``
 2. ``yarn | para instalar as bibliotecas dependentes do projeto  ``
 3. ``Criar o arquivo .env com base no .env.example``
-4. ``yarn typerom migration: run | para criar as tabelas ``
+4. ``yarn typeorm migration:run | para criar as tabelas ``
 5. ``yarn dev:server | iniciar projeto``
 
 ### 💻 Iniciando com o Front-end
