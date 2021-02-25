@@ -30,6 +30,9 @@ class User {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Column('boolean', { default: true })
+  status: boolean;
 }
 
 export default User;

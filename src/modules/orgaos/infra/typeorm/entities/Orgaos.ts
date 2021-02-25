@@ -32,6 +32,9 @@ class Orgaos {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Column('boolean', { default: true })
+  status: boolean;
 }
 
 export default Orgaos;

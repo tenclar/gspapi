@@ -10,6 +10,9 @@ class InstituicaoSuperior {
 
   @Column()
   slug: string;
+
+  @Column('boolean', { default: true })
+  status: boolean;
 }
 
 export default InstituicaoSuperior;
