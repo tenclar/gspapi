@@ -27,6 +27,9 @@ import LocalRepository from '@modules/local/infra/typeorm/repositories/LocalRepo
 import IServicosRepository from '@modules/servicos/repositories/IServicosRepository';
 import ServicosRepository from '@modules/servicos/infra/typeorm/repositories/ServicosRepository';
 
+import IAvisosRepository from '@modules/avisos/repositories/IAvisosRepository';
+import AvisosRepository from '@modules/avisos/infra/typeorm/repositories/AvisosRepository';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -64,4 +67,9 @@ container.registerSingleton<ILocalRepository>(
 container.registerSingleton<IServicosRepository>(
   'ServicosRepository',
   ServicosRepository,
+);
+
+container.registerSingleton<IAvisosRepository>(
+  'AvisosRepository',
+  AvisosRepository,
 );
