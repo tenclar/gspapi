@@ -17,6 +17,7 @@ describe('ShowAvisosService', () => {
     const avisoShow = await fakeAvisosRepository.create({
       titulo: 'AVISO 1',
       conteudo: 'dfdsf',
+      slug: 'fdsf',
       imagem: '',
       status: true,
     });

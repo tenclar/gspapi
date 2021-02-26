@@ -8,6 +8,9 @@ import IAvisosRepository from '@modules/avisos/repositories/IAvisosRepository';
 interface IRequest {
   id: string;
   titulo: string;
+  conteudo?: string;
+  imagem?: string;
+  status: boolean;
 }
 @injectable()
 class UpdateAvisosService {

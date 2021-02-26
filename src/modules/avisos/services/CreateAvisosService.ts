@@ -8,7 +8,7 @@ import IAvisosRepository from '../repositories/IAvisosRepository';
 interface IRequest {
   titulo: string;
   conteudo?: string;
-  imagem: string;
+  imagem?: string;
   status: boolean;
 }
 
