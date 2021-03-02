@@ -29,7 +29,8 @@ describe('ListAvisoService', () => {
       status: true,
     });
 
-    const avisos = await listAvisos.execute({ titulo: '%' });
+    const avisos = await listAvisos.execute({ titulo: 'A' });
+
     expect(avisos).toEqual([aviso1, aviso2]);
   });
 });
