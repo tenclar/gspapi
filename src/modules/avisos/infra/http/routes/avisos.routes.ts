@@ -1,41 +1,41 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
-import CidadesController from '../controllers/CidadesController';
+import AvisosController from '../controllers/AvisosController';
 
-const cidadeRouter = Router();
+const avisoRouter = Router();
 
-const cidadesController = new CidadesController();
+const avisosController = new AvisosController();
 
-cidadeRouter.post(
+avisoRouter.post(
   '/',
   celebrate({
     [Segments.BODY]: {
       nome: Joi.string().required(),
     },
   }),
-  cidadesController.create,
+  avisosController.create,
 );
-cidadeRouter.put(
+avisoRouter.put(
   '/:id',
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
     },
     [Segments.BODY]: {
-      nome: Joi.string().required(),
+      titulo: Joi.string().required(),
     },
   }),
-  cidadesController.update,
+  avisosController.update,
 );
-cidadeRouter.get('/', cidadesController.index);
+avisoRouter.get('/', avisosController.index);
 
-cidadeRouter.get(
+avisoRouter.get(
   '/:id',
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
     },
   }),
-  cidadesController.show,
+  avisosController.show,
 );
-export default cidadeRouter;
+export default avisoRouter;
