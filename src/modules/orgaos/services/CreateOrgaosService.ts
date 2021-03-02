@@ -13,7 +13,7 @@ interface IRequest {
 @injectable()
 class CreateOrgaosService {
   constructor(
-    @inject('OrgaoRepository')
+    @inject('OrgaosRepository')
     private orgaosRepository: IOrgaosRepository,
   ) {}
 
