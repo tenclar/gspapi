@@ -35,7 +35,9 @@ class FakeCategoriasRepository implements ICategoriasRepository {
   }
 
   public async findAllLikeTitulo(titulo: string): Promise<Categoria[]> {
-    const categorias = this.categorias.filter(u => u.titulo === titulo);
+    const categorias = this.categorias.filter(
+      u => u.titulo.toLowerCase().indexOf(titulo.toLocaleLowerCase()) > -1,
+    );
 
     return categorias;
   }
