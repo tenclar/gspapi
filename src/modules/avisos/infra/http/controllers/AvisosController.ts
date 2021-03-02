@@ -8,9 +8,14 @@ import UpdateAvisosService from '@modules/avisos/services/UpdateAvisosService';
 
 export default class AvisoController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { titulo } = request.body;
+    const { titulo, conteudo, imagem, status } = request.body;
     const CreateAviso = container.resolve(CreateAvisosService);
-    const aviso = await CreateAviso.execute({ titulo });
+    const aviso = await CreateAviso.execute({
+      titulo,
+      conteudo,
+      imagem,
+      status,
+    });
     return response.json({ aviso: classToClass(aviso) });
   }
 
@@ -30,12 +35,14 @@ export default class AvisoController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const { titulo } = request.body;
+    const { titulo, conteudo, imagem, status } = request.body;
     const updateAvisos = container.resolve(UpdateAvisosService);
 
     const aviso = await updateAvisos.execute({
-      id,
       titulo,
+      conteudo,
+      imagem,
+      status,
     });
 
     return response.json({ aviso: classToClass(aviso) });
