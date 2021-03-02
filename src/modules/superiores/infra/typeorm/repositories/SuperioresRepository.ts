@@ -1,4 +1,4 @@
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, Raw } from 'typeorm';
 import ISuperioresRepository from '@modules/superiores/repositories/ISuperioresRepository';
 import ICreateSuperioresDTO from '@modules/superiores/dtos/ICreateSuperioresDTO';
 
@@ -26,6 +26,13 @@ class SuperioresRepository implements ISuperioresRepository {
   async findAll(): Promise<Superior[]> {
     const superiores = await this.ormRepository.find();
     return superiores;
+  }
+
+  async findAllLikeNome(nome: string): Promise<Superior[]> {
+    const lista = await this.ormRepository.find({
+      where: { nome: Raw(alias => `${alias} ILIKE '%${nome}%'`) },
+    });
+    return lista;
   }
 
   async create(superiorData: ICreateSuperioresDTO): Promise<Superior> {

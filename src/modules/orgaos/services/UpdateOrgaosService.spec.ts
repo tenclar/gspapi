@@ -24,7 +24,6 @@ describe('UpdateOrgaos', () => {
     const updateOrgao = await updateOrgaos.execute({
       id: orgao.id,
       nome: 'Secretaria do Acre',
-      slug: 'secretaria-do-acre',
       superiores_id: '2',
     });
 
@@ -38,7 +37,6 @@ describe('UpdateOrgaos', () => {
       updateOrgaos.execute({
         id: 'non-existing-orgaos-id',
         nome: 'Test',
-        slug: 'test',
         superiores_id: 'test',
       }),
     ).rejects.toBeInstanceOf(AppError);

@@ -30,7 +30,7 @@ describe('ListProviderService', () => {
       categoria_id: '2',
     });
 
-    const providers = await listProviders.execute();
+    const providers = await listProviders.execute({ titulo: 'T' });
     expect(providers).toEqual([servico1, servico2]);
   });
 });

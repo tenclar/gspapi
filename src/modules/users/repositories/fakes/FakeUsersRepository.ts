@@ -23,6 +23,14 @@ class FakeUsersRepository implements IUsersRepository {
     return users;
   }
 
+  async findAllLikeName(nome: string): Promise<User[]> {
+    const users = this.users.filter(
+      u => u.name.toLowerCase().indexOf(nome.toLocaleLowerCase()) > -1,
+    );
+
+    return users;
+  }
+
   async create(userData: ICreateUserDTO): Promise<User> {
     const user = new User();
     Object.assign(user, { id: uuid() }, userData);

@@ -23,6 +23,13 @@ class FakeLocalRepository implements ILocalRepository {
     return local;
   }
 
+  public async findAllLikeNome(nome: string): Promise<Local[]> {
+    const local = this.local.filter(
+      u => u.nome.toLowerCase().indexOf(nome.toLocaleLowerCase()) > -1,
+    );
+    return local;
+  }
+
   async create(localData: ICreateLocalDTO): Promise<Local> {
     const local = new Local();
     Object.assign(local, { id: uuid() }, localData);

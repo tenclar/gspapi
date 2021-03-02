@@ -8,7 +8,6 @@ import IOrgaosRepository from '@modules/orgaos/repositories/IOrgaosRepository';
 interface IRequest {
   id: string;
   nome: string;
-  slug: string;
   superiores_id: string;
 }
 @injectable()

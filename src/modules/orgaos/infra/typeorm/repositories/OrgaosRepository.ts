@@ -1,4 +1,4 @@
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, Raw } from 'typeorm';
 import IOrgaoRepository from '@modules/orgaos/repositories/IOrgaosRepository';
 import ICreateOrgaoDTO from '@modules/orgaos/dtos/ICreateOrgaosDTO';
 
@@ -26,6 +26,14 @@ class OrgaosRepository implements IOrgaoRepository {
   async findAll(): Promise<Orgao[]> {
     const orgaos = await this.ormRepository.find();
     return orgaos;
+  }
+
+  async findAllLikeNome(nome: string): Promise<Orgao[]> {
+    const listaorgaos = await this.ormRepository.find({
+      relations: ['orgaos'],
+      where: { nome: Raw(alias => `${alias} ILIKE '%${nome}%'`) },
+    });
+    return listaorgaos;
   }
 
   async create(orgaoData: ICreateOrgaoDTO): Promise<Orgao> {

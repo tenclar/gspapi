@@ -18,6 +18,14 @@ class FakeServicosRepository implements IServicosRepository {
     return servicoFind;
   }
 
+  async findAllLikeTitulo(titulo: string): Promise<Servico[]> {
+    const users = this.servicos.filter(
+      u => u.titulo.toLowerCase().indexOf(titulo.toLocaleLowerCase()) > -1,
+    );
+
+    return users;
+  }
+
   public async findAll(): Promise<Servico[]> {
     const { servicos } = this;
     return servicos;

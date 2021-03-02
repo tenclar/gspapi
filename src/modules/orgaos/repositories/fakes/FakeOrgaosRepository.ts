@@ -23,6 +23,13 @@ class FakeOrgaosRepository implements IOrgaosRepository {
     return orgaos;
   }
 
+  public async findAllLikeNome(nome: string): Promise<Orgao[]> {
+    const orgaos = this.orgaos.filter(
+      u => u.nome.toLowerCase().indexOf(nome.toLocaleLowerCase()) > -1,
+    );
+    return orgaos;
+  }
+
   async create(orgaoData: ICreateOrgaoDTO): Promise<Orgao> {
     const orgao = new Orgao();
     Object.assign(orgao, { id: uuid() }, orgaoData);

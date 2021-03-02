@@ -27,7 +27,7 @@ describe('ListLocalervice', () => {
       cidade_id: '2',
     });
 
-    const local = await listLocal.execute();
+    const local = await listLocal.execute({ nome: 'C' });
     expect(local).toEqual([local1, local2]);
   });
 });
