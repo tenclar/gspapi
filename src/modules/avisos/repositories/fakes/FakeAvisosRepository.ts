@@ -39,7 +39,9 @@ class FakeAvisosRepository implements IAvisosRepository {
   }
 
   public async findAllLikeTitulo(titulo: string): Promise<Aviso[]> {
-    const avisos = this.avisos.filter(u => u.titulo === titulo);
+    const avisos = this.avisos.filter(
+      u => u.titulo.toLowerCase().indexOf(titulo.toLocaleLowerCase()) > -1,
+    );
 
     return avisos;
   }
