@@ -26,7 +26,7 @@ describe('ListProviderService', () => {
       categoria_id: '123',
     });
 
-    const providers = await listProviders.execute();
+    const providers = await listProviders.execute({ titulo: 'J' });
     expect(providers).toEqual([categoria1, categoria2]);
   });
 });
