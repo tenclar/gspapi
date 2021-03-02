@@ -19,11 +19,11 @@ describe('ListCidadeService', () => {
       slug: 'rio-branco',
     });
     const cidade2 = await fakeCidadesRepository.create({
-      nome: 'Sena Madureira',
-      slug: 'sena-madureira',
+      nome: 'Rena Madureira',
+      slug: 'rena-madureira',
     });
 
-    const cidades = await listCidades.execute();
+    const cidades = await listCidades.execute({ nome: 'R' });
     expect(cidades).toEqual([cidade1, cidade2]);
   });
 });
