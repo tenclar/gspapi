@@ -4,7 +4,7 @@ export default class AddTableAviso1614367910411 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'cidades',
+        name: 'avisos',
         columns: [
           {
             name: 'id',
