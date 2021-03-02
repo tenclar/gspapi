@@ -15,7 +15,7 @@ class Aviso {
   titulo: string;
 
   @Column()
-  conteudo: string;
+  conteudo?: string;
 
   @Column()
   slug: string;
@@ -27,7 +27,7 @@ class Aviso {
   updated_at: Date;
 
   @Column()
-  imagem: string;
+  imagem?: string;
 
   @Column('boolean', { default: true })
   status: boolean;
