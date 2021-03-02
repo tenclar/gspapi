@@ -30,7 +30,6 @@ class OrgaosRepository implements IOrgaoRepository {
 
   async findAllLikeNome(nome: string): Promise<Orgao[]> {
     const listaorgaos = await this.ormRepository.find({
-      relations: ['orgaos'],
       where: { nome: Raw(alias => `${alias} ILIKE '%${nome}%'`) },
     });
     return listaorgaos;
