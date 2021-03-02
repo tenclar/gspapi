@@ -16,9 +16,9 @@ describe('ShowAvisosService', () => {
   it('should be able to show the AVISO', async () => {
     const avisoShow = await fakeAvisosRepository.create({
       titulo: 'AVISO 1',
-      conteudo: 'dfdsf',
-      slug: 'fdsf',
-      imagem: '',
+      conteudo: 'aviso-1',
+      slug: 'aviso-1',
+      imagem: 'imagem',
       status: true,
     });
 
@@ -26,8 +26,11 @@ describe('ShowAvisosService', () => {
       id: avisoShow.id,
     });
 
-    expect(aviso.titulo).toBe('Rio Branco');
-    expect(aviso.slug).toBe('rio-branco');
+    expect(aviso.titulo).toBe('AVISO 1');
+    expect(aviso.slug).toBe('aviso-1');
+    expect(aviso.conteudo).toBe('aviso-1');
+    expect(aviso.imagem).toBe('imagem');
+    expect(aviso.status).toBe(true);
   });
 
   it('should not be able show the AVISOS from non-existing AVISOS', async () => {
