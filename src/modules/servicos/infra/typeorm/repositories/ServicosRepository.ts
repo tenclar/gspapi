@@ -1,4 +1,4 @@
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, Raw } from 'typeorm';
 import IServicosRepository from '@modules/servicos/repositories/IServicosRepository';
 import ICreateServicoDTO from '@modules/servicos/dtos/ICreateServicoDTO';
 import Servico from '../entities/Servico';
@@ -25,6 +25,13 @@ class ServicosRepository implements IServicosRepository {
   async findAll(): Promise<Servico[]> {
     const servicos = await this.ormRepository.find();
     return servicos;
+  }
+
+  async findAllLikeTitulo(titulo: string): Promise<Servico[]> {
+    const lista = await this.ormRepository.find({
+      where: { titulo: Raw(alias => `${alias} ILIKE '%${titulo}%'`) },
+    });
+    return lista;
   }
 
   async create(servicoData: ICreateServicoDTO): Promise<Servico> {
