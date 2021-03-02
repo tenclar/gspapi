@@ -23,7 +23,6 @@ class CidadesRepository implements ICidadeRepository {
     return cidade;
   }
 
-
   async findAllLikeNome(nome: string): Promise<Cidade[]> {
     const listacategorias = await this.ormRepository.find({
       where: { nome: Raw(alias => `${alias} ILIKE '%${nome}%'`) },
