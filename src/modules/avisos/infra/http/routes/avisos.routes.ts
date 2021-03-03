@@ -10,7 +10,10 @@ avisoRouter.post(
   '/',
   celebrate({
     [Segments.BODY]: {
-      nome: Joi.string().required(),
+      titulo: Joi.string().required(),
+      conteudo: Joi.string(),
+      imagem: Joi.string(),
+      status: Joi.boolean().required(),
     },
   }),
   avisosController.create,
@@ -23,6 +26,9 @@ avisoRouter.put(
     },
     [Segments.BODY]: {
       titulo: Joi.string().required(),
+      conteudo: Joi.string(),
+      imagem: Joi.string(),
+      status: Joi.boolean().required(),
     },
   }),
   avisosController.update,

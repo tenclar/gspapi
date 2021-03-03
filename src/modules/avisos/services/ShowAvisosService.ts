@@ -12,12 +12,13 @@ interface IRequest {
 @injectable()
 class ShowAvisosService {
   constructor(
-    @inject('CidadesRepository')
+    @inject('AvisosRepository')
     private avisosRepository: IAvisosRepository,
   ) {}
 
   public async execute({ id }: IRequest): Promise<Aviso> {
     const aviso = await this.avisosRepository.findById(id);
+
     if (!aviso) {
       throw new AppError('AVISO not Found');
     }

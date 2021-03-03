@@ -12,7 +12,9 @@ class AvisosRepository implements IAvisoRepository {
   }
 
   async findById(id: string): Promise<Aviso | undefined> {
-    const aviso = await this.ormRepository.findOne(id);
+    const aviso = await this.ormRepository.findOne({
+      where: { id },
+    });
     return aviso;
   }
 
