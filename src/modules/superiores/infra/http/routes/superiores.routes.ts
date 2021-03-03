@@ -16,8 +16,11 @@ superioresRouter.post(
   superioresController.create,
 );
 superioresRouter.put(
-  '/',
+  '/:id',
   celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
     [Segments.BODY]: {
       id: Joi.string().required(),
       nome: Joi.string().required(),
