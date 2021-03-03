@@ -1,4 +1,4 @@
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, Raw } from 'typeorm';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 import User from '../entities/User';
@@ -25,6 +25,13 @@ class UsersRepository implements IUsersRepository {
   async findAll(): Promise<User[]> {
     const users = await this.ormRepository.find();
     return users;
+  }
+
+  async findAllLikeName(name: string): Promise<User[]> {
+    const listacategorias = await this.ormRepository.find({
+      where: { name: Raw(alias => `${alias} ILIKE '%${name}%'`) },
+    });
+    return listacategorias;
   }
 
   async create(userData: ICreateUserDTO): Promise<User> {
