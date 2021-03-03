@@ -11,8 +11,9 @@ servicoRouter.post(
   celebrate({
     [Segments.BODY]: {
       titulo: Joi.string().required(),
-      slug: Joi.string().required(),
       informacao: Joi.string().required(),
+      categoria_id: Joi.string(),
+      orgao_id: Joi.string().required(),
     },
   }),
   servicosController.create,
