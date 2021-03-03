@@ -24,6 +24,7 @@ export default class ServicosController {
 
   public async index(request: Request, response: Response): Promise<Response> {
     const { titulo } = request.query;
+    console.log('lista servicos');
     const listServicos = await container.resolve(ListServicoService);
     const servicos = await listServicos.execute({ titulo: String(titulo) });
     return response.json({ servicos: classToClass(servicos) });
