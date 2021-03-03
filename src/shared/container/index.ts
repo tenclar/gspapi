@@ -30,6 +30,9 @@ import ServicosRepository from '@modules/servicos/infra/typeorm/repositories/Ser
 import IAvisosRepository from '@modules/avisos/repositories/IAvisosRepository';
 import AvisosRepository from '@modules/avisos/infra/typeorm/repositories/AvisosRepository';
 
+import IInformacoesRepository from '@modules/informacoes/repositories/IInformacoesRepository';
+import InformacoesRepository from '@modules/informacoes/infra/typeorm/repositories/InformacoesRepository';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -72,4 +75,8 @@ container.registerSingleton<IServicosRepository>(
 container.registerSingleton<IAvisosRepository>(
   'AvisosRepository',
   AvisosRepository,
+);
+container.registerSingleton<IInformacoesRepository>(
+  'InformacoesRepository',
+  InformacoesRepository,
 );

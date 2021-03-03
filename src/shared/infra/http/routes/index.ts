@@ -11,6 +11,7 @@ import orgaosRouter from '@modules/orgaos/infra/http/routes/orgaos.routes';
 import superioresRouter from '@modules/superiores/infra/http/routes/superiores.routes';
 import locaisRouter from '@modules/local/infra/http/routes/local.routes';
 import avisosRouter from '@modules/avisos/infra/http/routes/avisos.routes';
+import informacoesRouter from '@modules/informacoes/infra/http/routes/informacoes.routes';
 
 const routes = Router();
 
@@ -29,5 +30,6 @@ routes.use('/cidades', cidadesRouter);
 routes.use('/orgaos', orgaosRouter);
 routes.use('/locais', locaisRouter);
 routes.use('/avisos', avisosRouter);
+routes.use('/informacoes', informacoesRouter);
 
 export default routes;
