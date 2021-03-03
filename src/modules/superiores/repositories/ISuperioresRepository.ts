@@ -6,5 +6,6 @@ export default interface ISuperiorRepository {
   save(superior: Superior): Promise<Superior | undefined>;
   findById(id: string): Promise<Superior | undefined>;
   findByNome(nome: string): Promise<Superior | undefined>;
+  findAllLikeNome(nome: string): Promise<Superior[]>;
   findAll(): Promise<Superior[]>;
 }

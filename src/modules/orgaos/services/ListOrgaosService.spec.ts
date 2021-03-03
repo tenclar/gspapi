@@ -25,7 +25,7 @@ describe('ListOrgaoService', () => {
       superiores_id: '123',
     });
 
-    const orgaos = await listOrgaos.execute();
+    const orgaos = await listOrgaos.execute({ nome: 'I' });
     expect(orgaos).toEqual([orgao1, orgao2]);
   });
 });

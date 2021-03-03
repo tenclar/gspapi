@@ -1,4 +1,4 @@
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, Raw } from 'typeorm';
 import ILocalRepository from '@modules/local/repositories/ILocalRepository';
 import ICreateLocalDTO from '@modules/local/dtos/ICreateLocalDTO';
 
@@ -26,6 +26,13 @@ class LocalRepository implements ILocalRepository {
   async findAll(): Promise<Local[]> {
     const local = await this.ormRepository.find();
     return local;
+  }
+
+  async findAllLikeNome(nome: string): Promise<Local[]> {
+    const lista = await this.ormRepository.find({
+      where: { nome: Raw(alias => `${alias} ILIKE '%${nome}%'`) },
+    });
+    return lista;
   }
 
   async create(localData: ICreateLocalDTO): Promise<Local> {

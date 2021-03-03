@@ -23,6 +23,13 @@ class FakeSuperiorsRepository implements ISuperiorsRepository {
     return superior;
   }
 
+  public async findAllLikeNome(nome: string): Promise<Superior[]> {
+    const superior = this.superior.filter(
+      u => u.nome.toLowerCase().indexOf(nome.toLocaleLowerCase()) > -1,
+    );
+    return superior;
+  }
+
   async create(superiorData: ICreateSuperiorDTO): Promise<Superior> {
     const superior = new Superior();
     Object.assign(superior, { id: uuid() }, superiorData);

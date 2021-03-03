@@ -6,5 +6,6 @@ export default interface ILocalRepository {
   save(local: Local): Promise<Local | undefined>;
   findById(id: string): Promise<Local | undefined>;
   findByNome(nome: string): Promise<Local | undefined>;
+  findAllLikeNome(nome: string): Promise<Local[]>;
   findAll(): Promise<Local[]>;
 }

@@ -11,16 +11,22 @@ localRouter.post(
   celebrate({
     [Segments.BODY]: {
       nome: Joi.string().required(),
+      orgao_id: Joi.string().required(),
+      cidade_id: Joi.string().required(),
     },
   }),
   localController.create,
 );
 localRouter.put(
-  '/',
+  '/:id',
   celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
     [Segments.BODY]: {
-      id: Joi.string().required(),
       nome: Joi.string().required(),
+      orgao_id: Joi.string().required(),
+      cidade_id: Joi.string().required(),
     },
   }),
   localController.update,

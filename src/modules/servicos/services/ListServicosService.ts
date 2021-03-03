@@ -5,7 +5,7 @@ import IServicosRepository from '@modules/servicos/repositories/IServicosReposit
 // import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 
 interface IRequest {
-  servico_id: string;
+  titulo: string;
 }
 @injectable()
 class ListProviderService {
@@ -14,7 +14,7 @@ class ListProviderService {
     private servicosRepository: IServicosRepository, // @inject('CacheProvider') // private cacheProvider: ICacheProvider,
   ) {}
 
-  public async execute(): Promise<Servicos[]> {
+  public async execute({ titulo }: IRequest): Promise<Servicos[]> {
     /*
     let servicos = await this.cacheProvider.recover<Servico[]>(
       `providers-list:${servico_id}`,
@@ -23,8 +23,8 @@ class ListProviderService {
      */
 
     // if (!servicos) {
-    const servicos = await this.servicosRepository.findAll();
-
+    // const servicos = await this.servicosRepository.findAll();
+    const servicos = await this.servicosRepository.findAllLikeTitulo(titulo);
     // await this.cacheProvider.save(`providers-list:${servico_id}`, servicos);
     // }
 

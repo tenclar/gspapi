@@ -8,9 +8,9 @@ import UpdateLocalService from '@modules/local/services/UpdateLocalService';
 
 export default class LocalController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { nome } = request.body;
+    const { nome, cidade_id, orgao_id } = request.body;
     const CreateLocal = container.resolve(CreateLocalService);
-    const local = await CreateLocal.execute({ nome });
+    const local = await CreateLocal.execute({ nome, cidade_id, orgao_id });
     return response.json({ local: classToClass(local) });
   }
 
@@ -22,19 +22,22 @@ export default class LocalController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
+    const { nome } = request.query;
     const listLocal = await container.resolve(ListLocalService);
-    const local = await listLocal.execute();
+    const local = await listLocal.execute({ nome: String(nome) });
     return response.json({ local: classToClass(local) });
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
     // const { id } = request.params;
-    const { id, nome } = request.body;
+    const { id, nome, orgao_id, cidade_id } = request.body;
     const updateLocal = container.resolve(UpdateLocalService);
 
     const local = await updateLocal.execute({
       id,
       nome,
+      orgao_id,
+      cidade_id,
     });
 
     return response.json({ local: classToClass(local) });

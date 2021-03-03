@@ -39,6 +39,7 @@ export default class AvisoController {
     const updateAvisos = container.resolve(UpdateAvisosService);
 
     const aviso = await updateAvisos.execute({
+      id,
       titulo,
       conteudo,
       imagem,

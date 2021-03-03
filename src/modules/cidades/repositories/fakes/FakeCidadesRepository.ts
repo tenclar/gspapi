@@ -23,6 +23,14 @@ class FakeCidadesRepository implements ICidadesRepository {
     return cidades;
   }
 
+  public async findAllLikeNome(nome: string): Promise<Cidade[]> {
+    const cidades = this.cidades.filter(
+      u => u.nome.toLowerCase().indexOf(nome.toLocaleLowerCase()) > -1,
+    );
+
+    return cidades;
+  }
+
   async create(cidadeData: ICreateCidadeDTO): Promise<Cidade> {
     const cidade = new Cidade();
     Object.assign(cidade, { id: uuid() }, cidadeData);

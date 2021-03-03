@@ -22,8 +22,9 @@ export default class OrgaosController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
+    const { nome } = request.query;
     const listOrgaos = await container.resolve(ListOrgaosService);
-    const orgaos = await listOrgaos.execute();
+    const orgaos = await listOrgaos.execute({ nome: String(nome) });
     return response.json({ orgaos: classToClass(orgaos) });
   }
 

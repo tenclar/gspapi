@@ -21,8 +21,11 @@ servicoRouter.post(
 servicoRouter.get('/', servicosController.index);
 
 servicoRouter.put(
-  '/',
+  '/:id',
   celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
     [Segments.BODY]: {
       id: Joi.string().required(),
       nome: Joi.string().required(),

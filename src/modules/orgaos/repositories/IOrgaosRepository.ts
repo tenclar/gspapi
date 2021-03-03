@@ -6,5 +6,6 @@ export default interface IOrgaoRepository {
   save(orgao: Orgao): Promise<Orgao | undefined>;
   findById(id: string): Promise<Orgao | undefined>;
   findByNome(nome: string): Promise<Orgao | undefined>;
+  findAllLikeNome(nome: string): Promise<Orgao[]>;
   findAll(): Promise<Orgao[]>;
 }

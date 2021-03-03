@@ -31,7 +31,7 @@ describe('CreateAvisos', () => {
 
     expect(
       createAvisos.execute({
-        titulo: 'AVISO 3',
+        titulo: 'AVISO 2',
         conteudo: 'dfdsf',
         imagem: '',
         status: true,

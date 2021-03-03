@@ -17,10 +17,12 @@ orgaoRouter.post(
   orgaosController.create,
 );
 orgaoRouter.put(
-  '/',
+  '/:id',
   celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
     [Segments.BODY]: {
-      id: Joi.string().required(),
       nome: Joi.string().required(),
       superiores_id: Joi.string().required(),
     },

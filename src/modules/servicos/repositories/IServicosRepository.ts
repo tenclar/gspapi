@@ -6,5 +6,6 @@ export default interface IServicosReposotory {
   save(servico: Servico): Promise<Servico>;
   findById(id: string): Promise<Servico | undefined>;
   findByTitulo(titulo: string): Promise<Servico | undefined>;
+  findAllLikeTitulo(titulo: string): Promise<Servico[]>;
   findAll(): Promise<Servico[]>;
 }
