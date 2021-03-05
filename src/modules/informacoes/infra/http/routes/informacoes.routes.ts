@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
-import AvisosController from '../controllers/AvisosController';
+import InformacoesController from '../controllers/InformacoesController';
 
-const avisoRouter = Router();
+const informacaoRouter = Router();
 
-const avisosController = new AvisosController();
+const informacoesController = new InformacoesController();
 
-avisoRouter.post(
+informacaoRouter.post(
   '/',
   celebrate({
     [Segments.BODY]: {
@@ -16,9 +16,9 @@ avisoRouter.post(
       status: Joi.boolean().required(),
     },
   }),
-  avisosController.create,
+  informacoesController.create,
 );
-avisoRouter.put(
+informacaoRouter.put(
   '/:id',
   celebrate({
     [Segments.PARAMS]: {
@@ -31,17 +31,17 @@ avisoRouter.put(
       status: Joi.boolean().required(),
     },
   }),
-  avisosController.update,
+  informacoesController.update,
 );
-avisoRouter.get('/', avisosController.index);
+informacaoRouter.get('/', informacoesController.index);
 
-avisoRouter.get(
+informacaoRouter.get(
   '/:id',
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required(),
     },
   }),
-  avisosController.show,
+  informacoesController.show,
 );
-export default avisoRouter;
+export default informacaoRouter;
