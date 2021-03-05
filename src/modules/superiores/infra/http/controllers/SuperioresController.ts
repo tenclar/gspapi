@@ -11,20 +11,20 @@ export default class SuperioresController {
     const { nome } = request.body;
     const CreateSuperiores = container.resolve(CreateSuperioresService);
     const superior = await CreateSuperiores.execute({ nome });
-    return response.json({ isuperior: classToClass(superior) });
+    return response.json({ superior: classToClass(superior) });
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const showSuperiores = container.resolve(ShowSuperioreservice);
     const instsuperior = await showSuperiores.execute({ id });
-    return response.json({ isuperior: classToClass(instsuperior) });
+    return response.json({ superior: classToClass(instsuperior) });
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
     const listSuperiores = await container.resolve(ListSuperioresService);
     const superiores = await listSuperiores.execute();
-    return response.json({ isuperiores: classToClass(superiores) });
+    return response.json({ superiores: classToClass(superiores) });
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
@@ -36,6 +36,6 @@ export default class SuperioresController {
       nome,
     });
 
-    return response.json({ isuperior: classToClass(superior) });
+    return response.json({ superior: classToClass(superior) });
   }
 }
