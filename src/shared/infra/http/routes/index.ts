@@ -12,6 +12,7 @@ import superioresRouter from '@modules/superiores/infra/http/routes/superiores.r
 import locaisRouter from '@modules/local/infra/http/routes/local.routes';
 import avisosRouter from '@modules/avisos/infra/http/routes/avisos.routes';
 import informacoesRouter from '@modules/informacoes/infra/http/routes/informacoes.routes';
+import centraisRouter from '@modules/centrais/infra/http/routes/centrais.routes';
 
 const routes = Router();
 
@@ -23,13 +24,15 @@ routes.use('/sessions', sessionsRouter);
 routes.use('/password', passwordRouter);
 routes.use('/users', usersRouter);
 routes.use('/profile', profileRouter);
+
+routes.use('/avisos', avisosRouter);
 routes.use('/categorias', categoriasRouter);
+routes.use('/centrais', centraisRouter);
+routes.use('/cidades', cidadesRouter);
+routes.use('/informacoes', informacoesRouter);
+routes.use('/locais', locaisRouter);
+routes.use('/orgaos', orgaosRouter);
 routes.use('/servicos', servicosRouter);
 routes.use('/superiores', superioresRouter);
-routes.use('/cidades', cidadesRouter);
-routes.use('/orgaos', orgaosRouter);
-routes.use('/locais', locaisRouter);
-routes.use('/avisos', avisosRouter);
-routes.use('/informacoes', informacoesRouter);
 
 export default routes;
