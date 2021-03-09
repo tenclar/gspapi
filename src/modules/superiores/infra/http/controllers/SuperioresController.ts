@@ -22,13 +22,15 @@ export default class SuperioresController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
+    const { nome } = request.query;
     const listSuperiores = await container.resolve(ListSuperioresService);
-    const superiores = await listSuperiores.execute();
+    const superiores = await listSuperiores.execute({ nome: String(nome) });
     return response.json({ superiores: classToClass(superiores) });
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const { id, nome } = request.body;
+    const { id } = request.params;
+    const { nome } = request.body;
     const updateSuperiores = container.resolve(UpdateSuperioresService);
 
     const superior = await updateSuperiores.execute({

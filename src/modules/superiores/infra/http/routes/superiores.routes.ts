@@ -22,7 +22,6 @@ superioresRouter.put(
       id: Joi.string().uuid().required(),
     },
     [Segments.BODY]: {
-      id: Joi.string().required(),
       nome: Joi.string().required(),
     },
   }),
