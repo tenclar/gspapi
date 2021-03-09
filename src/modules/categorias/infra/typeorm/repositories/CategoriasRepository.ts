@@ -3,7 +3,7 @@ import ICategoriasRepository from '@modules/categorias/repositories/ICategoriasR
 import ICreateCategoriaDTO from '@modules/categorias/dtos/ICreateCategoriaDTO';
 
 import Categoria from '../entities/Categoria';
-
+/*
 interface ICategorias {
   id: string;
   categoria_id: string | null;
@@ -13,7 +13,7 @@ interface ICategorias {
   updated_at: string;
   subcategory: [];
 }
-
+ */
 class CategoriasRepository implements ICategoriasRepository {
   private ormRepository: Repository<Categoria>;
 
