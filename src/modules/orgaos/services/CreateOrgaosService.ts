@@ -8,6 +8,7 @@ import IOrgaosRepository from '../repositories/IOrgaosRepository';
 interface IRequest {
   nome: string;
   superiores_id: string;
+  status: boolean;
 }
 
 @injectable()
@@ -17,7 +18,11 @@ class CreateOrgaosService {
     private orgaosRepository: IOrgaosRepository,
   ) {}
 
-  public async execute({ nome, superiores_id }: IRequest): Promise<Orgao> {
+  public async execute({
+    nome,
+    superiores_id,
+    status,
+  }: IRequest): Promise<Orgao> {
     const checkOrgaosExists = await this.orgaosRepository.findByNome(nome);
 
     if (checkOrgaosExists) {
@@ -27,6 +32,7 @@ class CreateOrgaosService {
       nome,
       slug: slug(nome),
       superiores_id,
+      status,
     });
     await this.orgaosRepository.save(orgao);
     return orgao;

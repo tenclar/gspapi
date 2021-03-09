@@ -8,9 +8,9 @@ import UpdateOrgaosService from '@modules/orgaos/services/UpdateOrgaosService';
 
 export default class OrgaosController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { nome, superiores_id } = request.body;
+    const { nome, superiores_id, status } = request.body;
     const CreateOrgaos = container.resolve(CreateOrgaosService);
-    const orgao = await CreateOrgaos.execute({ nome, superiores_id });
+    const orgao = await CreateOrgaos.execute({ nome, superiores_id, status });
     return response.json({ orgao: classToClass(orgao) });
   }
 

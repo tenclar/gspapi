@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import Superiores from '@modules/superiores/infra/typeorm/entities/InstituicaoSuperior';
+import Superior from '@modules/superiores/infra/typeorm/entities/InstituicaoSuperior';
 
 @Entity('orgaos')
 class Orgaos {
@@ -23,9 +23,9 @@ class Orgaos {
   @Column()
   superiores_id: string;
 
-  @ManyToOne(() => Superiores)
+  @ManyToOne(() => Superior)
   @JoinColumn({ name: 'superiores_id' })
-  superiores: Superiores;
+  superior: Superior;
 
   @CreateDateColumn()
   created_at: Date;

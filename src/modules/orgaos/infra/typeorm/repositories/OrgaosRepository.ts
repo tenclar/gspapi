@@ -12,7 +12,9 @@ class OrgaosRepository implements IOrgaoRepository {
   }
 
   async findById(id: string): Promise<Orgao | undefined> {
-    const orgao = await this.ormRepository.findOne(id);
+    const orgao = await this.ormRepository.findOne(id, {
+      relations: ['superior'],
+    });
     return orgao;
   }
 

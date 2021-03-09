@@ -12,6 +12,7 @@ orgaoRouter.post(
     [Segments.BODY]: {
       nome: Joi.string().required(),
       superiores_id: Joi.string().required(),
+      status: Joi.string().required(),
     },
   }),
   orgaosController.create,
@@ -25,6 +26,7 @@ orgaoRouter.put(
     [Segments.BODY]: {
       nome: Joi.string().required(),
       superiores_id: Joi.string().required(),
+      status: Joi.string().required(),
     },
   }),
   orgaosController.update,
