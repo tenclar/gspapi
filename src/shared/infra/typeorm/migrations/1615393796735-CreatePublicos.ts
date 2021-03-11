@@ -4,7 +4,7 @@ export default class CreatePublicos1615393796735 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'publico',
+        name: 'publicos',
         columns: [
           {
             name: 'id',
@@ -46,6 +46,6 @@ export default class CreatePublicos1615393796735 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('publico');
+    await queryRunner.dropTable('publicos');
   }
 }

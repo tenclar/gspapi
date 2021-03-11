@@ -1,6 +1,5 @@
 import Categoria from '@modules/categorias/infra/typeorm/entities/Categoria';
 import Orgao from '@modules/orgaos/infra/typeorm/entities/Orgaos';
-import Publico from '@modules/publicos/infra/typeorm/entities/Publico';
 import {
   Entity,
   Column,
@@ -9,8 +8,6 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
-  ManyToMany,
-  JoinTable,
 } from 'typeorm';
 
 @Entity('servicos')
@@ -52,10 +49,6 @@ class Servico {
 
   @Column('boolean', { default: true })
   status: boolean;
-
-  @ManyToMany(() => Publico, publico => publico.servicos)
-  @JoinTable()
-  publicos: Publico[];
 }
 
 export default Servico;

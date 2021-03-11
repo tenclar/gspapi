@@ -1,9 +1,7 @@
-import Servico from '@modules/servicos/infra/typeorm/entities/Servico';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -27,9 +25,6 @@ class Publico {
 
   @Column('boolean', { default: true })
   status: boolean;
-
-  @ManyToMany(() => Servico, servico => servico.publicos)
-  servicos: Servico[];
 }
 
 export default Publico;
