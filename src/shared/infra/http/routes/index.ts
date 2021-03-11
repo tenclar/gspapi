@@ -14,6 +14,7 @@ import avisosRouter from '@modules/avisos/infra/http/routes/avisos.routes';
 import informacoesRouter from '@modules/informacoes/infra/http/routes/informacoes.routes';
 import centraisRouter from '@modules/centrais/infra/http/routes/centrais.routes';
 import publicosRouter from '@modules/publicos/infra/http/routes/publico.routes';
+import temasRouter from '@modules/temas/infra/http/routes/tema.routes';
 
 const routes = Router();
 
@@ -36,5 +37,6 @@ routes.use('/orgaos', orgaosRouter);
 routes.use('/servicos', servicosRouter);
 routes.use('/superiores', superioresRouter);
 routes.use('/publicos', publicosRouter);
+routes.use('/temas', temasRouter);
 
 export default routes;

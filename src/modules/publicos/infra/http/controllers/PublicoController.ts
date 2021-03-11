@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import { classToClass } from 'class-transformer';
 import { container } from 'tsyringe';
 import CreatePublicoService from '@modules/publicos/services/CreatePublicoService';
-import ShowPublicoService from '@modules/publicos/services/ShowLocalService';
-import ListPublicoService from '@modules/publicos/services/ListLocalService';
-import UpdatePublicoService from '@modules/publicos/services/UpdateLocalService';
+import ShowPublicoService from '@modules/publicos/services/ShowPublicoService';
+import ListPublicoService from '@modules/publicos/services/ListPublicoService';
+import UpdatePublicoService from '@modules/publicos/services/UpdatePublicoService';
 
 export default class PublicoController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -30,13 +30,12 @@ export default class PublicoController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const { nome, status } = request.body;
+    const { nome } = request.body;
     const updatePublico = container.resolve(UpdatePublicoService);
 
     const publico = await updatePublico.execute({
       id,
       nome,
-      status,
     });
 
     return response.json({ publico: classToClass(publico) });
