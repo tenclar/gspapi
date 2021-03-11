@@ -1,9 +1,11 @@
+import Praca from '@modules/pracas/infra/typeorm/entities/Praca';
 import {
   Column,
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  ManyToMany,
 } from 'typeorm';
 
 @Entity('centrais')
@@ -25,6 +27,9 @@ class Central {
 
   @Column('boolean', { default: true })
   status: boolean;
+
+  @ManyToMany(() => Praca, praca => praca.centrais)
+  pracas: Praca[];
 }
 
 export default Central;

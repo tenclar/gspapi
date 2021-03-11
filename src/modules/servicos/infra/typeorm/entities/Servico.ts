@@ -1,5 +1,6 @@
 import Categoria from '@modules/categorias/infra/typeorm/entities/Categoria';
 import Orgao from '@modules/orgaos/infra/typeorm/entities/Orgaos';
+import Praca from '@modules/pracas/infra/typeorm/entities/Praca';
 import Publico from '@modules/publicos/infra/typeorm/entities/Publico';
 import {
   Entity,
@@ -56,6 +57,10 @@ class Servico {
   @ManyToMany(() => Publico, publico => publico.servicos)
   @JoinTable()
   publicos: Publico[];
+
+  @ManyToMany(() => Praca, praca => praca.servico)
+  @JoinTable()
+  praca: Praca[];
 }
 
 export default Servico;

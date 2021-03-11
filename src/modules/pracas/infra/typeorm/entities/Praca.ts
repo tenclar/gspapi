@@ -1,9 +1,13 @@
+import Central from '@modules/centrais/infra/typeorm/entities/Central';
+import Servico from '@modules/servicos/infra/typeorm/entities/Servico';
 import {
   Column,
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 
 @Entity('pracas')
@@ -25,6 +29,13 @@ class Praca {
 
   @Column('boolean', { default: true })
   status: boolean;
+
+  @ManyToMany(() => Servico, servico => servico.praca)
+  servico: Servico[];
+
+  @ManyToMany(() => Central, central => central.pracas)
+  @JoinTable()
+  centrais: Central[];
 }
 
 export default Praca;
