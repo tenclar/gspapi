@@ -9,7 +9,7 @@ interface IRequest {
 @injectable()
 class ListTemaService {
   constructor(
-    @inject('temaRepository')
+    @inject('TemasRepository')
     private temaRepository: ITemaRepository,
   ) {}
 

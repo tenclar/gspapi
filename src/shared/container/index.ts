@@ -36,6 +36,15 @@ import InformacoesRepository from '@modules/informacoes/infra/typeorm/repositori
 import ICentraisRepository from '@modules/centrais/repositories/ICentraisRepository';
 import CentraisRepository from '@modules/centrais/infra/typeorm/repositories/CentraisRepository';
 
+import IPublicosRepository from '@modules/publicos/repositories/IPublicoRepository';
+import PublicosRepository from '@modules/publicos/infra/typeorm/repositories/PublicoRepository';
+
+import IPracasRepository from '@modules/pracas/repositories/IPracasRepository';
+import PracasRepository from '@modules/pracas/infra/typeorm/repositories/PracasRepository';
+
+import ITemasRepository from '@modules/temas/repositories/ITemaRepository';
+import TemasRepository from '@modules/temas/infra/typeorm/repositories/TemaRepository';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -86,4 +95,16 @@ container.registerSingleton<IInformacoesRepository>(
 container.registerSingleton<ICentraisRepository>(
   'CentraisRepository',
   CentraisRepository,
+);
+container.registerSingleton<IPublicosRepository>(
+  'PublicosRepository',
+  PublicosRepository,
+);
+container.registerSingleton<IPracasRepository>(
+  'PracasRepository',
+  PracasRepository,
+);
+container.registerSingleton<ITemasRepository>(
+  'TemasRepository',
+  TemasRepository,
 );

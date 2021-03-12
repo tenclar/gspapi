@@ -14,7 +14,7 @@ interface IRequest {
 @injectable()
 class CreateTemaService {
   constructor(
-    @inject('temaRepository')
+    @inject('TemaRepository')
     private temaRepository: ITemaRepository,
   ) {}
 
@@ -22,7 +22,7 @@ class CreateTemaService {
     const checkTemaExists = await this.temaRepository.findByNome(nome);
 
     if (checkTemaExists) {
-      throw new AppError('Local Already used.');
+      throw new AppError('TEMA já está sendo usado.');
     }
     const tema = await this.temaRepository.create({
       nome,
