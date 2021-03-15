@@ -1,15 +1,15 @@
-import Praca from '@modules/pracas/infra/typeorm/entities/Praca';
+import Servico from '@modules/servicos/infra/typeorm/entities/Servico';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  ManyToMany,
 } from 'typeorm';
 
-@Entity('centrais')
-class Central {
+@Entity('temas')
+class Tema {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -28,8 +28,8 @@ class Central {
   @Column('boolean', { default: true })
   status: boolean;
 
-  @ManyToMany(() => Praca, praca => praca.centrais)
-  pracas: Praca[];
+  @ManyToMany(() => Servico, servico => servico.temas)
+  servicos: Servico[];
 }
 
-export default Central;
+export default Tema;

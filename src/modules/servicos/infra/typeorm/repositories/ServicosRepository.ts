@@ -34,6 +34,13 @@ class ServicosRepository implements IServicosRepository {
     return lista;
   }
 
+  async findJoinAll(): Promise<Servico[]> {
+    const lista = await this.ormRepository.find({
+      relations: ['publicos'],
+    });
+    return lista;
+  }
+
   async create(servicoData: ICreateServicoDTO): Promise<Servico> {
     const servico = this.ormRepository.create(servicoData);
     await this.ormRepository.save(servico);

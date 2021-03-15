@@ -1,11 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class AddTableInformacoes1614788730455
-  implements MigrationInterface {
+export default class CreateTemas1615555617576 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'informacoes',
+        name: 'temas',
         columns: [
           {
             name: 'id',
@@ -14,16 +13,13 @@ export default class AddTableInformacoes1614788730455
             generationStrategy: 'uuid',
             default: 'uuid_generate_v4()',
           },
+
           {
-            name: 'titulo',
+            name: 'nome',
             type: 'varchar',
             isNullable: false,
           },
-          {
-            name: 'conteudo',
-            type: 'text',
-            isNullable: true,
-          },
+
           {
             name: 'slug',
             type: 'varchar',
@@ -41,11 +37,6 @@ export default class AddTableInformacoes1614788730455
             default: 'now()',
           },
           {
-            name: 'imagem',
-            type: 'varchar',
-            isNullable: true,
-          },
-          {
             name: 'status',
             type: 'boolean',
             isNullable: false,
@@ -56,6 +47,6 @@ export default class AddTableInformacoes1614788730455
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('informacoes');
+    await queryRunner.dropTable('temas');
   }
 }

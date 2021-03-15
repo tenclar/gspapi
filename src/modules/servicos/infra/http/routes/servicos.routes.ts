@@ -1,11 +1,15 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 import ServicosController from '../controllers/ServicosController';
+import ServicosAllJoinController from '../controllers/ServicosAllJoinController';
 
 const servicoRouter = Router();
 
 const servicosController = new ServicosController();
+const servicosAllJoinController = new ServicosAllJoinController();
 
+servicoRouter.get('/', servicosController.index);
+servicoRouter.get('/alljoin', servicosAllJoinController.index);
 servicoRouter.post(
   '/',
   celebrate({
@@ -14,12 +18,11 @@ servicoRouter.post(
       informacao: Joi.string().required(),
       categoria_id: Joi.string(),
       orgao_id: Joi.string().required(),
+      publicos: Joi.array(),
     },
   }),
   servicosController.create,
 );
-
-servicoRouter.get('/', servicosController.index);
 
 servicoRouter.put(
   '/:id',
@@ -34,7 +37,6 @@ servicoRouter.put(
   }),
   servicosController.update,
 );
-servicoRouter.get('/', servicosController.index);
 
 servicoRouter.get(
   '/:id',

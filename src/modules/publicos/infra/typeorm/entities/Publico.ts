@@ -1,15 +1,16 @@
-import Praca from '@modules/pracas/infra/typeorm/entities/Praca';
+import ServicosPublicos from '@modules/servicos/infra/typeorm/entities/ServicosPublicos';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  ManyToMany,
 } from 'typeorm';
 
-@Entity('centrais')
-class Central {
+@Entity('publicos')
+class Publico {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -28,8 +29,12 @@ class Central {
   @Column('boolean', { default: true })
   status: boolean;
 
-  @ManyToMany(() => Praca, praca => praca.centrais)
-  pracas: Praca[];
+  @OneToMany(
+    () => ServicosPublicos,
+    servicospublicos => servicospublicos.servico,
+  )
+  @JoinColumn({ name: 'publico_id' })
+  servicos: ServicosPublicos[];
 }
 
-export default Central;
+export default Publico;

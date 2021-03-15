@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class AddTableAviso1614367910411 implements MigrationInterface {
+export default class CreatePracas1615469308469 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'avisos',
+        name: 'pracas',
         columns: [
           {
             name: 'id',
@@ -14,18 +14,18 @@ export default class AddTableAviso1614367910411 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'titulo',
+            name: 'nome',
             type: 'varchar',
             isNullable: false,
           },
           {
-            name: 'conteudo',
-            type: 'text',
-            isNullable: true,
-          },
-          {
             name: 'slug',
             type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'status',
+            type: 'boolean',
             isNullable: false,
           },
 
@@ -39,22 +39,12 @@ export default class AddTableAviso1614367910411 implements MigrationInterface {
             type: 'timestamp',
             default: 'now()',
           },
-          {
-            name: 'imagem',
-            type: 'varchar',
-            isNullable: true,
-          },
-          {
-            name: 'status',
-            type: 'boolean',
-            isNullable: false,
-          },
         ],
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('avisos');
+    await queryRunner.dropTable('pracas');
   }
 }
