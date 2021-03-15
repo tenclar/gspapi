@@ -1,5 +1,6 @@
 import Central from '@modules/centrais/infra/typeorm/entities/Central';
-import Servico from '@modules/servicos/infra/typeorm/entities/Servico';
+
+import ServicosPracas from '@modules/servicos/infra/typeorm/entities/ServicosPracas';
 import {
   Column,
   CreateDateColumn,
@@ -8,6 +9,8 @@ import {
   UpdateDateColumn,
   ManyToMany,
   JoinTable,
+  OneToMany,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity('pracas')
@@ -30,8 +33,9 @@ class Praca {
   @Column('boolean', { default: true })
   status: boolean;
 
-  @ManyToMany(() => Servico, servico => servico.praca)
-  servico: Servico[];
+  @OneToMany(() => ServicosPracas, servicospracas => servicospracas.servico)
+  @JoinColumn({ name: 'local_id' })
+  servicos: ServicosPracas[];
 
   @ManyToMany(() => Central, central => central.pracas)
   @JoinTable()

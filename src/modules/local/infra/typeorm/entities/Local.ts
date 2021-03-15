@@ -1,11 +1,13 @@
 import Cidade from '@modules/cidades/infra/typeorm/entities/Cidade';
 import Orgaos from '@modules/orgaos/infra/typeorm/entities/Orgaos';
+import ServicosLocais from '@modules/servicos/infra/typeorm/entities/ServicosLocais';
 import {
   Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -34,6 +36,10 @@ class Local {
   @ManyToOne(() => Cidade)
   @JoinColumn({ name: 'cidade_id' })
   cidade: Cidade;
+
+  @OneToMany(() => ServicosLocais, servicoslocais => servicoslocais.local)
+  @JoinColumn({ name: 'local_id' })
+  servicos: ServicosLocais[];
 
   @CreateDateColumn()
   created_at: Date;
