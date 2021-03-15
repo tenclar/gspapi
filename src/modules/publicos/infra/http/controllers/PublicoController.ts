@@ -8,9 +8,9 @@ import UpdatePublicoService from '@modules/publicos/services/UpdatePublicoServic
 
 export default class PublicoController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { nome, status, slug } = request.body;
+    const { nome, status } = request.body;
     const CreatePublico = container.resolve(CreatePublicoService);
-    const publico = await CreatePublico.execute({ nome, status, slug });
+    const publico = await CreatePublico.execute({ nome, status });
     return response.json({ publico: classToClass(publico) });
   }
 
