@@ -1,9 +1,10 @@
-import Servico from '@modules/servicos/infra/typeorm/entities/Servico';
+import ServicosPublicos from '@modules/servicos/infra/typeorm/entities/ServicosPublicos';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToMany,
+  JoinColumn,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -28,8 +29,12 @@ class Publico {
   @Column('boolean', { default: true })
   status: boolean;
 
-  @ManyToMany(() => Servico, servico => servico.publicos)
-  servicos: Servico[];
+  @OneToMany(
+    () => ServicosPublicos,
+    servicospublicos => servicospublicos.servico,
+  )
+  @JoinColumn({ name: 'publico_id' })
+  servicos: ServicosPublicos[];
 }
 
 export default Publico;
