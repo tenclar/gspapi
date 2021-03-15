@@ -7,18 +7,17 @@ import IPublicoRepository from '../repositories/IPublicoRepository';
 
 interface IRequest {
   nome: string;
-  slug: string;
   status: boolean;
 }
 
 @injectable()
 class CreatePublicoService {
   constructor(
-    @inject('publicoRepository')
+    @inject('PublicosRepository')
     private publicoRepository: IPublicoRepository,
   ) {}
 
-  public async execute({ nome, slug, status }: IRequest): Promise<Publico> {
+  public async execute({ nome, status }: IRequest): Promise<Publico> {
     const checkPublicoExists = await this.publicoRepository.findByNome(nome);
 
     if (checkPublicoExists) {
