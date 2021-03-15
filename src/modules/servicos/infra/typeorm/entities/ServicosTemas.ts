@@ -1,3 +1,4 @@
+import Tema from '@modules/temas/infra/typeorm/entities/Tema';
 import {
   Column,
   CreateDateColumn,
@@ -20,6 +21,10 @@ class ServicosTemas {
   @ManyToOne(() => Servico, servico => servico.temas)
   @JoinColumn({ name: 'servico_id' })
   servico: Servico;
+
+  @ManyToOne(() => Tema, tema => tema.servicos)
+  @JoinColumn({ name: 'tema_id' })
+  publico: Tema;
 
   @CreateDateColumn()
   created_at: Date;
