@@ -11,6 +11,7 @@ publicoRouter.post(
   celebrate({
     [Segments.BODY]: {
       nome: Joi.string().required(),
+      status: Joi.boolean(),
     },
   }),
   publicoController.create,
