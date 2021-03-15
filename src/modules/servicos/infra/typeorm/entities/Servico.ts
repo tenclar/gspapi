@@ -1,8 +1,10 @@
 import Categoria from '@modules/categorias/infra/typeorm/entities/Categoria';
 import Orgao from '@modules/orgaos/infra/typeorm/entities/Orgaos';
-import Praca from '@modules/pracas/infra/typeorm/entities/Praca';
-import Publico from '@modules/publicos/infra/typeorm/entities/Publico';
-import Tema from '@modules/temas/infra/typeorm/entities/Tema';
+import ServicosEtapas from '@modules/servicos/infra/typeorm/entities/ServicosEtapas';
+import ServicosLocais from '@modules/servicos/infra/typeorm/entities/ServicosLocais';
+import ServicosPracas from '@modules/servicos/infra/typeorm/entities/ServicosPracas';
+import ServicosPublicos from '@modules/servicos/infra/typeorm/entities/ServicosPublicos';
+import ServicosTemas from '@modules/servicos/infra/typeorm/entities/ServicosTemas';
 import {
   Entity,
   Column,
@@ -11,8 +13,8 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
-  ManyToMany,
   JoinTable,
+  OneToMany,
 } from 'typeorm';
 
 @Entity('servicos')
@@ -35,9 +37,6 @@ class Servico {
   @Column()
   categoria_id: string;
 
-  @Column()
-  publico: string;
-
   @ManyToOne(() => Orgao)
   @JoinColumn({ name: 'orgao_id' })
   orgao: Orgao;
@@ -46,26 +45,34 @@ class Servico {
   @JoinColumn({ name: 'categoria_id' })
   categoria: Categoria;
 
+  @Column('boolean', { default: true })
+  status: boolean;
+
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
 
-  @Column('boolean', { default: true })
-  status: boolean;
+  @OneToMany(() => ServicosEtapas, etapas => etapas.servico, {
+    cascade: true,
+  })
+  etapas: ServicosEtapas[];
 
-  @ManyToMany(() => Publico, publico => publico.servicos)
-  @JoinTable()
-  publicos: Publico[];
+  @OneToMany(() => ServicosLocais, locais => locais.servico)
+  locais: ServicosLocais[];
 
-  @ManyToMany(() => Praca, praca => praca.servico)
-  @JoinTable()
-  praca: Praca[];
+  @OneToMany(() => ServicosPublicos, publicos => publicos.servico, {
+    cascade: true,
+  })
+  publicos: ServicosPublicos[];
 
-  @ManyToMany(() => Tema, tema => tema.servicos)
+  @OneToMany(() => ServicosPracas, pracas => pracas.servico)
+  pracas: ServicosEtapas[];
+
+  @OneToMany(() => ServicosTemas, temas => temas.servico)
   @JoinTable()
-  temas: Tema[];
+  temas: ServicosTemas[];
 }
 
 export default Servico;
