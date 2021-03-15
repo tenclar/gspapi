@@ -12,7 +12,7 @@ interface IRequest {
 @injectable()
 class UpdatePublicoService {
   constructor(
-    @inject('publicoRepository')
+    @inject('PublicosRepository')
     private publicoRepository: IPublicoRepository,
   ) {}
 

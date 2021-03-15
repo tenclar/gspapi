@@ -9,7 +9,7 @@ interface IRequest {
 @injectable()
 class ListPublicoService {
   constructor(
-    @inject('publicoRepository')
+    @inject('PublicosRepository')
     private publicoRepository: IPublicoRepository,
   ) {}
 

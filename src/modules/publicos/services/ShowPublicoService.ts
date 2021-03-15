@@ -12,7 +12,7 @@ interface IRequest {
 @injectable()
 class ShowPublicoService {
   constructor(
-    @inject('publicoRepository')
+    @inject('PublicosRepository')
     private localRepository: IPublicoRepository,
   ) {}
 
