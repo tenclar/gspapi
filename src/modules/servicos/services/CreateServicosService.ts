@@ -8,12 +8,35 @@ interface IPublico {
   publico_id: string;
 }
 
+interface ILocal {
+  local_id: string;
+}
+
+interface IPraca {
+  praca_id: string;
+}
+
+interface ITema {
+  tema_id: string;
+}
+
+interface IEtapa {
+  titulo: string;
+  slug: string;
+  informacao: string;
+}
+
 interface IRequest {
   titulo: string;
+  slug: string;
   informacao: string;
   orgao_id: string;
   categoria_id: string;
   publicos: IPublico[];
+  locais: ILocal[];
+  pracas: IPraca[];
+  temas: ITema[];
+  etapas: IEtapa[];
 }
 @injectable()
 class CreateServicoService {
@@ -28,6 +51,10 @@ class CreateServicoService {
     categoria_id,
     orgao_id,
     publicos,
+    locais,
+    pracas,
+    temas,
+    etapas,
   }: IRequest): Promise<Servico> {
     const checkServicoExists = await this.servicosRepository.findByTitulo(
       titulo,
@@ -44,6 +71,10 @@ class CreateServicoService {
       orgao_id,
       categoria_id,
       publicos,
+      locais,
+      pracas,
+      temas,
+      etapas,
     });
     await this.servicosRepository.save(servico);
 
