@@ -18,13 +18,16 @@ class ServicosTemas {
   @Column()
   servico_id: string;
 
+  @Column()
+  tema_id: string;
+
   @ManyToOne(() => Servico, servico => servico.temas)
   @JoinColumn({ name: 'servico_id' })
   servico: Servico;
 
   @ManyToOne(() => Tema, tema => tema.servicos)
   @JoinColumn({ name: 'tema_id' })
-  publico: Tema;
+  tema: Tema;
 
   @CreateDateColumn()
   created_at: Date;

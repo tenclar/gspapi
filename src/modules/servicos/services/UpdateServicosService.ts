@@ -4,21 +4,22 @@ import slug from '@shared/utils/slug';
 import { injectable, inject } from 'tsyringe';
 
 import IServicosRepository from '@modules/servicos/repositories/IServicosRepository';
+import IPublicosRepository from '@modules/publicos/repositories/IPublicoRepository';
 
 interface IPublico {
-  publico_id: string;
+  id: string;
 }
 
 interface ILocal {
-  local_id: string;
+  id: string;
 }
 
 interface IPraca {
-  praca_id: string;
+  id: string;
 }
 
 interface ITema {
-  tema_id: string;
+  id: string;
 }
 
 interface IEtapa {
@@ -45,6 +46,8 @@ class UpdateServicosService {
   constructor(
     @inject('ServicosRepository')
     private servicosRepository: IServicosRepository,
+    @inject('PublicosRepository')
+    private publicosRepository: IPublicosRepository,
   ) {}
 
   public async execute({
@@ -64,12 +67,16 @@ class UpdateServicosService {
       throw new AppError('Servico not Found');
     }
 
+    const existentPublicos = await this.publicosRepository.findAllById(
+      publicos,
+    );
+
     servico.titulo = titulo;
     servico.slug = slug(titulo);
     servico.orgao_id = orgao_id;
     servico.categoria_id = categoria_id;
     servico.informacao = informacao;
-    servico.publicos = publicos;
+    servico.publicos = existentPublicos;
     servico.locais = locais;
     servico.pracas = pracas;
     servico.temas = temas;

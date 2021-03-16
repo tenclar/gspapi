@@ -2,19 +2,19 @@ interface IPublico {
   publico_id: string;
 }
 
-interface ILocais {
+interface ILocal {
   local_id: string;
 }
 
-interface IPracas {
+interface IPraca {
   praca_id: string;
 }
 
-interface ITemas {
+interface ITema {
   tema_id: string;
 }
 
-interface IEtapas {
+interface IEtapa {
   titulo: string;
   slug: string;
   informacao: string;
@@ -27,8 +27,8 @@ export default interface ICreateServicoDTO {
   orgao_id: string;
   categoria_id: string;
   publicos: IPublico[];
-  locais: ILocais[];
-  pracas: IPracas[];
-  temas: ITemas[];
-  etapas: IEtapas[];
+  locais: ILocal[];
+  pracas: IPraca[];
+  temas: ITema[];
+  etapas: IEtapa[];
 }
