@@ -12,7 +12,7 @@ orgaoRouter.post(
     [Segments.BODY]: {
       nome: Joi.string().required(),
       superiores_id: Joi.string().required(),
-      status: Joi.string().required(),
+      status: Joi.boolean().required(),
     },
   }),
   orgaosController.create,

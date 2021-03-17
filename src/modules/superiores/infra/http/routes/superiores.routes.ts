@@ -11,6 +11,7 @@ superioresRouter.post(
   celebrate({
     [Segments.BODY]: {
       nome: Joi.string().required(),
+      status: Joi.boolean(),
     },
   }),
   superioresController.create,

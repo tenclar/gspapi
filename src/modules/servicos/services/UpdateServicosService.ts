@@ -79,11 +79,11 @@ class UpdateServicosService {
     servico.informacao = informacao;
 
     servico.publicos = [...servico.publicos, ...publicos];
-    servico.locais = [...servico.locais, ...locais];
+    /*  servico.locais = [...servico.locais, ...locais];
     servico.pracas = [...servico.pracas, ...pracas];
     servico.temas = [...servico.temas, ...temas];
     servico.etapas = [...servico.etapas, ...etapas];
-
+ */
     await this.servicosRepository.save(servico);
     return servico;
   }
