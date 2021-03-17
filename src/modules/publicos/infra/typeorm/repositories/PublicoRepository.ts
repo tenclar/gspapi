@@ -5,7 +5,7 @@ import ICreatePublicoDTO from '@modules/publicos/dtos/ICreatePublicoDTO';
 import Publico from '@modules/publicos/infra/typeorm/entities/Publico';
 
 interface IFindPublicos {
-  id: string;
+  publico_id: string;
 }
 
 class PublicoRepository implements IPublicoRepository {
@@ -33,7 +33,7 @@ class PublicoRepository implements IPublicoRepository {
   }
 
   public async findAllById(publicos: IFindPublicos[]): Promise<Publico[]> {
-    const publicoIds = publicos.map(p => p.id);
+    const publicoIds = publicos.map(p => p.publico_id);
 
     const existentPublicos = await this.ormRepository.find({
       where: {

@@ -7,19 +7,20 @@ import IServicosRepository from '@modules/servicos/repositories/IServicosReposit
 import IPublicosRepository from '@modules/publicos/repositories/IPublicoRepository';
 
 interface IPublico {
-  id: string;
+  publico_id: string;
 }
 
 interface ILocal {
-  id: string;
+  locais_id: string;
 }
 
 interface IPraca {
   id: string;
+  praca_id: string;
 }
 
 interface ITema {
-  id: string;
+  tema_id: string;
 }
 
 interface IEtapa {
@@ -67,20 +68,21 @@ class UpdateServicosService {
       throw new AppError('Servico not Found');
     }
 
-    const existentPublicos = await this.publicosRepository.findAllById(
+    /*  const existentPublicos = await this.publicosRepository.findAllById(
       publicos,
-    );
+    ); */
 
     servico.titulo = titulo;
     servico.slug = slug(titulo);
     servico.orgao_id = orgao_id;
     servico.categoria_id = categoria_id;
     servico.informacao = informacao;
-    servico.publicos = existentPublicos;
-    servico.locais = locais;
-    servico.pracas = pracas;
-    servico.temas = temas;
-    servico.etapas = etapas;
+
+    servico.publicos = [...servico.publicos, ...publicos];
+    servico.locais = [...servico.locais, ...locais];
+    servico.pracas = [...servico.pracas, ...pracas];
+    servico.temas = [...servico.temas, ...temas];
+    servico.etapas = [...servico.etapas, ...etapas];
 
     await this.servicosRepository.save(servico);
     return servico;

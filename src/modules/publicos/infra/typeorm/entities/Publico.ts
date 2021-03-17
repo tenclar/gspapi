@@ -3,7 +3,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -31,9 +30,8 @@ class Publico {
 
   @OneToMany(
     () => ServicosPublicos,
-    servicospublicos => servicospublicos.servico,
+    servicospublicos => servicospublicos.publico,
   )
-  @JoinColumn({ name: 'publico_id' })
   servicos: ServicosPublicos[];
 }
 

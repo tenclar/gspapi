@@ -12,10 +12,10 @@ import Servico from './Servico';
 @Entity('servicos_etapas')
 class ServicosEtapas {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id?: string;
 
   @Column()
-  servico_id: string;
+  servico_id?: string;
 
   @Column('text')
   titulo: string;
@@ -28,13 +28,13 @@ class ServicosEtapas {
 
   @ManyToOne(() => Servico, servico => servico.etapas)
   @JoinColumn({ name: 'servico_id' })
-  servico: Servico;
+  servico?: Servico;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at?: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at?: Date;
 }
 
 export default ServicosEtapas;

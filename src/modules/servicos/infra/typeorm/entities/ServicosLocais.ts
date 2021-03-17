@@ -13,27 +13,27 @@ import Servico from './Servico';
 @Entity('servicos_locais')
 class ServicosLocais {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id?: string;
 
   @Column()
-  servico_id: string;
+  servico_id?: string;
 
   @Column()
-  local_id: string;
+  locais_id: string;
 
   @ManyToOne(() => Servico, servico => servico.locais)
   @JoinColumn({ name: 'servico_id' })
-  servico: Servico;
+  servico?: Servico;
 
   @ManyToOne(() => Local, local => local.servicos)
-  @JoinColumn({ name: 'local_id' })
-  local: Local;
+  @JoinColumn({ name: 'locais_id' })
+  local?: Local;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at?: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at?: Date;
 }
 
 export default ServicosLocais;

@@ -13,27 +13,27 @@ import Servico from './Servico';
 @Entity('servicos_publicos')
 class ServicosPublicos {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id?: string;
 
   @Column()
-  servico_id: string;
+  servico_id?: string;
 
   @Column()
   publico_id: string;
 
   @ManyToOne(() => Servico, servico => servico.publicos)
   @JoinColumn({ name: 'servico_id' })
-  servico: Servico;
+  servico?: Servico;
 
   @ManyToOne(() => Publico, publico => publico.servicos)
   @JoinColumn({ name: 'publico_id' })
-  publico: Publico;
+  publico?: Publico;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at?: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at?: Date;
 }
 
 export default ServicosPublicos;

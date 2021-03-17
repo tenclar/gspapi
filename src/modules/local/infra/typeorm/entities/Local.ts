@@ -38,7 +38,6 @@ class Local {
   cidade: Cidade;
 
   @OneToMany(() => ServicosLocais, servicoslocais => servicoslocais.local)
-  @JoinColumn({ name: 'local_id' })
   servicos: ServicosLocais[];
 
   @CreateDateColumn()

@@ -2,7 +2,7 @@ import ICreatePublicoDTO from '@modules/publicos/dtos/ICreatePublicoDTO';
 import Publico from '@modules/publicos/infra/typeorm/entities/Publico';
 
 interface IFindPublicos {
-  id: string;
+  publico_id: string;
 }
 
 export default interface IPublicoRepository {
