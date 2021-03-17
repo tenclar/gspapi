@@ -1,8 +1,12 @@
-import { Repository, getRepository, Raw } from 'typeorm';
+import { Repository, getRepository, Raw, In } from 'typeorm';
 import IPublicoRepository from '@modules/publicos/repositories/IPublicoRepository';
 import ICreatePublicoDTO from '@modules/publicos/dtos/ICreatePublicoDTO';
 
 import Publico from '@modules/publicos/infra/typeorm/entities/Publico';
+
+interface IFindPublicos {
+  publico_id: string;
+}
 
 class PublicoRepository implements IPublicoRepository {
   private ormRepository: Repository<Publico>;
@@ -26,6 +30,18 @@ class PublicoRepository implements IPublicoRepository {
   async findAll(): Promise<Publico[]> {
     const publico = await this.ormRepository.find();
     return publico;
+  }
+
+  public async findAllById(publicos: IFindPublicos[]): Promise<Publico[]> {
+    const publicoIds = publicos.map(p => p.publico_id);
+
+    const existentPublicos = await this.ormRepository.find({
+      where: {
+        id: In(publicoIds),
+      },
+    });
+
+    return existentPublicos;
   }
 
   async findAllLikeNome(nome: string): Promise<Publico[]> {

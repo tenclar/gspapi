@@ -7,6 +7,7 @@ import ListServicoService from '@modules/servicos/services/ListServicosService';
 import ListServicoLikeTituloService from '@modules/servicos/services/ListServicosLikeTituloService';
 import ShowServicosService from '@modules/servicos/services/ShowServicosService';
 import UpdateServicosService from '@modules/servicos/services/UpdateServicosService';
+import slug from '@shared/utils/slug';
 
 export default class ServicosController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -16,15 +17,24 @@ export default class ServicosController {
       orgao_id,
       categoria_id,
       publicos,
+      locais,
+      pracas,
+      temas,
+      etapas,
     } = request.body;
 
     const createServico = container.resolve(CreateServicoService);
     const servico = await createServico.execute({
       titulo,
+      slug: slug(titulo),
       informacao,
       orgao_id,
       categoria_id,
       publicos,
+      locais,
+      pracas,
+      temas,
+      etapas,
     });
 
     return response.json({ servico: classToClass(servico) });
@@ -56,7 +66,18 @@ export default class ServicosController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     // const { id } = request.params;
-    const { id, titulo, informacao, orgao_id, categoria_id } = request.body;
+    const {
+      id,
+      titulo,
+      informacao,
+      orgao_id,
+      categoria_id,
+      publicos,
+      locais,
+      pracas,
+      temas,
+      etapas,
+    } = request.body;
     const updateServicos = container.resolve(UpdateServicosService);
 
     const servico = await updateServicos.execute({
@@ -65,6 +86,11 @@ export default class ServicosController {
       informacao,
       orgao_id,
       categoria_id,
+      publicos,
+      locais,
+      pracas,
+      temas,
+      etapas,
     });
 
     return response.json({ servico: classToClass(servico) });

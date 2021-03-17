@@ -10,7 +10,6 @@ import {
   ManyToMany,
   JoinTable,
   OneToMany,
-  JoinColumn,
 } from 'typeorm';
 
 @Entity('pracas')
@@ -33,8 +32,7 @@ class Praca {
   @Column('boolean', { default: true })
   status: boolean;
 
-  @OneToMany(() => ServicosPracas, servicospracas => servicospracas.servico)
-  @JoinColumn({ name: 'local_id' })
+  @OneToMany(() => ServicosPracas, servicospracas => servicospracas.praca)
   servicos: ServicosPracas[];
 
   @ManyToMany(() => Central, central => central.pracas)

@@ -11,7 +11,10 @@ class ServicosRepository implements IServicosRepository {
   }
 
   async findById(id: string): Promise<Servico | undefined> {
-    const servico = await this.ormRepository.findOne(id);
+    const servico = await this.ormRepository.findOne(id, {
+      relations: ['publicos', 'locais', 'pracas', 'temas', 'etapas'],
+    });
+
     return servico;
   }
 
@@ -36,7 +39,7 @@ class ServicosRepository implements IServicosRepository {
 
   async findJoinAll(): Promise<Servico[]> {
     const lista = await this.ormRepository.find({
-      relations: ['publicos'],
+      relations: ['publicos', 'locais', 'pracas', 'temas', 'etapas'],
     });
     return lista;
   }

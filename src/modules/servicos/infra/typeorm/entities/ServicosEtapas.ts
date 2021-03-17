@@ -5,16 +5,17 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  JoinColumn,
 } from 'typeorm';
 import Servico from './Servico';
 
 @Entity('servicos_etapas')
-class ServicosEtatas {
+class ServicosEtapas {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id?: string;
 
   @Column()
-  servico_id: string;
+  servico_id?: string;
 
   @Column('text')
   titulo: string;
@@ -26,13 +27,14 @@ class ServicosEtatas {
   informacao: string;
 
   @ManyToOne(() => Servico, servico => servico.etapas)
-  servico: Servico;
+  @JoinColumn({ name: 'servico_id' })
+  servico?: Servico;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at?: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at?: Date;
 }
 
-export default ServicosEtatas;
+export default ServicosEtapas;

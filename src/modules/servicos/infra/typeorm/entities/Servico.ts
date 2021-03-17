@@ -67,10 +67,14 @@ class Servico {
   })
   publicos: ServicosPublicos[];
 
-  @OneToMany(() => ServicosPracas, pracas => pracas.servico)
-  pracas: ServicosEtapas[];
+  @OneToMany(() => ServicosPracas, pracas => pracas.servico, {
+    cascade: true,
+  })
+  pracas: ServicosPracas[];
 
-  @OneToMany(() => ServicosTemas, temas => temas.servico)
+  @OneToMany(() => ServicosTemas, temas => temas.servico, {
+    cascade: true,
+  })
   @JoinTable()
   temas: ServicosTemas[];
 }
