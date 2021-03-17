@@ -30,12 +30,13 @@ export default class CidadeController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const { nome } = request.body;
+    const { nome, status } = request.body;
     const updateCidades = container.resolve(UpdateCidadesService);
 
     const cidade = await updateCidades.execute({
       id,
       nome,
+      status,
     });
 
     return response.json({ cidade: classToClass(cidade) });

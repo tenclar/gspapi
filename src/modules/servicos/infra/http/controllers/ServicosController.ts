@@ -65,11 +65,11 @@ export default class ServicosController {
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    // const { id } = request.params;
+    const { id } = request.params;
     const {
-      id,
       titulo,
       informacao,
+      status,
       orgao_id,
       categoria_id,
       publicos,
@@ -84,6 +84,7 @@ export default class ServicosController {
       id,
       titulo,
       informacao,
+      status,
       orgao_id,
       categoria_id,
       publicos,

@@ -8,6 +8,7 @@ import ISuperioresRepository from '@modules/superiores/repositories/ISuperioresR
 interface IRequest {
   id: string;
   nome: string;
+  status: boolean;
 }
 @injectable()
 class UpdateSuperioresService {
@@ -16,7 +17,7 @@ class UpdateSuperioresService {
     private superioresRepository: ISuperioresRepository,
   ) {}
 
-  public async execute({ id, nome }: IRequest): Promise<Superiore> {
+  public async execute({ id, nome, status }: IRequest): Promise<Superiore> {
     const superiore = await this.superioresRepository.findById(id);
     if (!superiore) {
       throw new AppError('Superiore not Found');
@@ -24,6 +25,7 @@ class UpdateSuperioresService {
 
     superiore.nome = nome;
     superiore.slug = slug(nome);
+    superiore.status = status;
 
     await this.superioresRepository.save(superiore);
     return superiore;

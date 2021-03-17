@@ -34,6 +34,7 @@ interface IRequest {
   titulo: string;
   slug: string;
   informacao: string;
+  status: boolean;
   orgao_id: string;
   categoria_id: string;
   publicos: IPublico[];
@@ -55,6 +56,7 @@ class UpdateServicosService {
     id,
     titulo,
     informacao,
+    status,
     orgao_id,
     categoria_id,
     publicos,
@@ -75,6 +77,7 @@ class UpdateServicosService {
     servico.titulo = titulo;
     servico.slug = slug(titulo);
     servico.orgao_id = orgao_id;
+    servico.status = status;
     servico.categoria_id = categoria_id;
     servico.informacao = informacao;
 

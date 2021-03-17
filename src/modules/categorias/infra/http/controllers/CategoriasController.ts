@@ -38,13 +38,14 @@ export default class CategoriasController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const { titulo, categoria_id } = request.body;
+    const { titulo, categoria_id, status } = request.body;
     const updateCategoria = container.resolve(UpdateCategoriaService);
 
     const user = await updateCategoria.execute({
       id,
       titulo,
       categoria_id,
+      status,
     });
     // delete user.password;
     return response.json({ categoria: classToClass(user) });

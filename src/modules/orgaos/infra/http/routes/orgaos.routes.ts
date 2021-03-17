@@ -24,9 +24,9 @@ orgaoRouter.put(
       id: Joi.string().uuid().required(),
     },
     [Segments.BODY]: {
-      nome: Joi.string().required(),
+      nome: Joi.string(),
       superiores_id: Joi.string().required(),
-      status: Joi.string().required(),
+      status: Joi.boolean(),
     },
   }),
   orgaosController.update,

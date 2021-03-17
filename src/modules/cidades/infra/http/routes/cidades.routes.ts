@@ -23,6 +23,7 @@ cidadeRouter.put(
     },
     [Segments.BODY]: {
       nome: Joi.string().required(),
+      status: Joi.boolean(),
     },
   }),
   cidadesController.update,

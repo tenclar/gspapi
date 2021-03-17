@@ -23,7 +23,8 @@ categoriaRouter.put(
       id: Joi.string().uuid().required(),
     },
     [Segments.BODY]: {
-      titulo: Joi.string().required(),
+      titulo: Joi.string(),
+      status: Joi.boolean(),
       categoria_id: Joi.string(),
     },
   }),

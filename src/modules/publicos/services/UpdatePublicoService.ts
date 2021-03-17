@@ -8,6 +8,7 @@ import IPublicoRepository from '@modules/publicos/repositories/IPublicoRepositor
 interface IRequest {
   id: string;
   nome: string;
+  status: boolean;
 }
 @injectable()
 class UpdatePublicoService {
@@ -16,7 +17,7 @@ class UpdatePublicoService {
     private publicoRepository: IPublicoRepository,
   ) {}
 
-  public async execute({ id, nome }: IRequest): Promise<Publico> {
+  public async execute({ id, nome, status }: IRequest): Promise<Publico> {
     const publico = await this.publicoRepository.findById(id);
     if (!publico) {
       throw new AppError('PUBLICO ALVO não encontrado');
@@ -24,6 +25,7 @@ class UpdatePublicoService {
 
     publico.nome = nome;
     publico.slug = slug(nome);
+    publico.status = status;
 
     await this.publicoRepository.save(publico);
     return publico;

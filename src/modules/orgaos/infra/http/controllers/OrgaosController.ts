@@ -29,14 +29,15 @@ export default class OrgaosController {
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    // const { id } = request.params;
-    const { id, nome, superiores_id } = request.body;
+    const { id } = request.params;
+    const { nome, superiores_id, status } = request.body;
     const updateOrgaos = container.resolve(UpdateOrgaosService);
 
     const orgao = await updateOrgaos.execute({
       id,
       nome,
       superiores_id,
+      status,
     });
 
     return response.json({ orgao: classToClass(orgao) });
