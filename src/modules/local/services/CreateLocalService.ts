@@ -9,6 +9,8 @@ interface IRequest {
   nome: string;
   orgao_id: string;
   cidade_id: string;
+  conteudo: string;
+  status: boolean;
 }
 
 @injectable()
@@ -22,6 +24,8 @@ class CreateLocalService {
     nome,
     orgao_id,
     cidade_id,
+    conteudo,
+    status,
   }: IRequest): Promise<Local> {
     const checkLocalExists = await this.localRepository.findByNome(nome);
 
@@ -33,6 +37,8 @@ class CreateLocalService {
       slug: slug(nome),
       orgao_id,
       cidade_id,
+      conteudo,
+      status,
     });
     await this.localRepository.save(local);
     return local;

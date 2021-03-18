@@ -44,7 +44,7 @@ export default class ServicosController {
     const { titulo } = request.query;
     let servicos: any[] = [];
 
-    if (titulo) {
+    if (!titulo) {
       const listServicos = await container.resolve(ListServicoService);
       servicos = await listServicos.execute();
     } else {
