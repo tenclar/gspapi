@@ -8,5 +8,6 @@ export default interface ICategoriasRepository {
   findByTitulo(titulo: string): Promise<Categoria | undefined>;
   findByTituloAndId(titulo: string, id: string): Promise<Categoria | undefined>;
   findAllLikeTitulo(titulo: string): Promise<Categoria[]>;
+  findAllRecursive(): Promise<Categoria[]>;
   findAll(): Promise<Categoria[]>;
 }

@@ -25,7 +25,7 @@ export default class TemaController {
     const { nome } = request.query;
     const listTema = await container.resolve(ListTemaService);
     const tema = await listTema.execute({ nome: String(nome) });
-    return response.json({ tema: classToClass(tema) });
+    return response.json({ temas: classToClass(tema) });
   }
 
   public async update(request: Request, response: Response): Promise<Response> {

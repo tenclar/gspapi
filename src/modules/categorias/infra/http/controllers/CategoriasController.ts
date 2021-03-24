@@ -5,7 +5,8 @@ import { container } from 'tsyringe';
 import CreateCategoriaService from '@modules/categorias/services/CreateCategoriasService';
 import ShowCategoriaService from '@modules/categorias/services/ShowCategoriasService';
 import UpdateCategoriaService from '@modules/categorias/services/UpdateCategoriasService';
-import ListCategoriaService from '@modules/categorias/services/ListCategoriasService';
+import ListCategoriaLikeTituloService from '@modules/categorias/services/ListCategoriasLikeTituloService';
+import ListCategoriasService from '@modules/categorias/services/ListCategoriasService';
 
 export default class CategoriasController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -29,10 +30,18 @@ export default class CategoriasController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
-    const { titulo = '%' } = request.query;
+    const { titulo } = request.query;
+    let categorias = [];
+    if (titulo) {
+      const listCategorias = await container.resolve(
+        ListCategoriaLikeTituloService,
+      );
+      categorias = await listCategorias.execute({ titulo: String(titulo) });
+    } else {
+      const listCategorias = await container.resolve(ListCategoriasService);
+      categorias = await listCategorias.execute();
+    }
 
-    const listCategorias = await container.resolve(ListCategoriaService);
-    const categorias = await listCategorias.execute({ titulo: String(titulo) });
     return response.json({ categorias: classToClass(categorias) });
   }
 

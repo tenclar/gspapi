@@ -34,6 +34,11 @@ class FakeCategoriasRepository implements ICategoriasRepository {
     return categorias;
   }
 
+  public async findAllRecursive(): Promise<Categoria[]> {
+    const { categorias } = this;
+    return categorias;
+  }
+
   public async findAllLikeTitulo(titulo: string): Promise<Categoria[]> {
     const categorias = this.categorias.filter(
       u => u.titulo.toLowerCase().indexOf(titulo.toLocaleLowerCase()) > -1,

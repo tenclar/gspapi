@@ -1,10 +1,12 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 import CategoriasController from '../controllers/CategoriasController';
+import CategoriasRecursiveController from '../controllers/CategoriasRecursiveController';
 
 const categoriaRouter = Router();
 
 const categoriasController = new CategoriasController();
+const categoriasRecursiveController = new CategoriasRecursiveController();
 
 categoriaRouter.post(
   '/',
@@ -30,6 +32,7 @@ categoriaRouter.put(
   categoriasController.update,
 );
 categoriaRouter.get('/', categoriasController.index);
+categoriaRouter.get('/recursive', categoriasRecursiveController.index);
 
 categoriaRouter.get(
   '/:id',
