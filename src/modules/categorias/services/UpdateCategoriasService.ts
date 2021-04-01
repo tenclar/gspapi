@@ -19,8 +19,8 @@ class UpdateCategoriasService {
 
   public async execute({
     id,
-    categoria_id,
     titulo,
+    categoria_id,
   }: IRequest): Promise<Categoria> {
     const categoria = await this.categoriasRepository.findById(id);
     if (!categoria) {
