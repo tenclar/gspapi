@@ -26,7 +26,7 @@ categoriaRouter.put(
     },
     [Segments.BODY]: {
       titulo: Joi.string().required(),
-      categoria_id: Joi.string(),
+      categoria_id: Joi.allow(),
     },
   }),
   categoriasController.update,

@@ -30,7 +30,7 @@ class UpdateCategoriasService {
     categoria.titulo = titulo;
     categoria.slug = slug(titulo);
     if (categoria_id) categoria.categoria_id = categoria_id;
-
+    if (!categoria_id) categoria.categoria_id = null;
     await this.categoriasRepository.save(categoria);
     return categoria;
   }
