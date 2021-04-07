@@ -11,7 +11,7 @@ superioresRouter.post(
   celebrate({
     [Segments.BODY]: {
       nome: Joi.string().required(),
-      status: Joi.boolean(),
+      status: Joi.boolean().required(),
     },
   }),
   superioresController.create,
@@ -23,7 +23,8 @@ superioresRouter.put(
       id: Joi.string().uuid().required(),
     },
     [Segments.BODY]: {
-      nome: Joi.string().required(),
+      nome: Joi.string(),
+      status: Joi.boolean(),
     },
   }),
   superioresController.update,

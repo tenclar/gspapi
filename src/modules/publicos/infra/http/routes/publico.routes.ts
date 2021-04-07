@@ -23,7 +23,8 @@ publicoRouter.put(
       id: Joi.string().uuid().required(),
     },
     [Segments.BODY]: {
-      nome: Joi.string().required(),
+      nome: Joi.string(),
+      status: Joi.boolean(),
     },
   }),
   publicoController.update,

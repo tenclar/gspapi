@@ -8,9 +8,14 @@ import UpdateLocalService from '@modules/local/services/UpdateLocalService';
 
 export default class LocalController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { nome, cidade_id, orgao_id } = request.body;
+    const { nome, cidade_id, orgao_id, conteudo } = request.body;
     const CreateLocal = container.resolve(CreateLocalService);
-    const local = await CreateLocal.execute({ nome, cidade_id, orgao_id });
+    const local = await CreateLocal.execute({
+      nome,
+      cidade_id,
+      orgao_id,
+      conteudo,
+    });
     return response.json({ local: classToClass(local) });
   }
 
@@ -30,7 +35,7 @@ export default class LocalController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     // const { id } = request.params;
-    const { id, nome, orgao_id, cidade_id } = request.body;
+    const { id, nome, orgao_id, cidade_id, conteudo, status } = request.body;
     const updateLocal = container.resolve(UpdateLocalService);
 
     const local = await updateLocal.execute({
@@ -38,6 +43,8 @@ export default class LocalController {
       nome,
       orgao_id,
       cidade_id,
+      conteudo,
+      status,
     });
 
     return response.json({ local: classToClass(local) });

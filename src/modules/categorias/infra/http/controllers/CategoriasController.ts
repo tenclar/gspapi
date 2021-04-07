@@ -47,7 +47,9 @@ export default class CategoriasController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
+
     const { titulo, categoria_id } = request.body;
+
 
     const updateCategoria = container.resolve(UpdateCategoriaService);
 
@@ -55,6 +57,7 @@ export default class CategoriasController {
       id,
       titulo,
       categoria_id,
+      status,
     });
     // delete categoria.categoria;
     console.log(classToClass(categoria));

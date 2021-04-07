@@ -30,12 +30,13 @@ export default class SuperioresController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const { nome } = request.body;
+    const { nome, status } = request.body;
     const updateSuperiores = container.resolve(UpdateSuperioresService);
 
     const superior = await updateSuperiores.execute({
       id,
       nome,
+      status,
     });
 
     return response.json({ superior: classToClass(superior) });

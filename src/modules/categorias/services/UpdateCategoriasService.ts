@@ -7,8 +7,9 @@ import ICategoriasRepository from '@modules/categorias/repositories/ICategoriasR
 
 interface IRequest {
   id: string;
-  categoria_id?: string;
   titulo: string;
+  categoria_id?: string;
+  status: boolean;
 }
 @injectable()
 class UpdateCategoriasService {
@@ -24,13 +25,13 @@ class UpdateCategoriasService {
   }: IRequest): Promise<Categoria> {
     const categoria = await this.categoriasRepository.findById(id);
     if (!categoria) {
-      throw new AppError('Categoria not Found');
+      throw new AppError('CATEGORIA não encontrada');
     }
 
     categoria.titulo = titulo;
     categoria.slug = slug(titulo);
+    if (categoria_id) categoria.categoria_id = categoria_id;
     categoria.categoria_id = categoria_id || null;
-
     await this.categoriasRepository.save(categoria);
     return categoria;
   }

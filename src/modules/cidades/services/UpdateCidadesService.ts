@@ -8,6 +8,7 @@ import ICidadesRepository from '@modules/cidades/repositories/ICidadesRepository
 interface IRequest {
   id: string;
   nome: string;
+  status: boolean;
 }
 @injectable()
 class UpdateCidadesService {
@@ -16,7 +17,7 @@ class UpdateCidadesService {
     private cidadesRepository: ICidadesRepository,
   ) {}
 
-  public async execute({ id, nome }: IRequest): Promise<Cidade> {
+  public async execute({ id, nome, status }: IRequest): Promise<Cidade> {
     const cidade = await this.cidadesRepository.findById(id);
     if (!cidade) {
       throw new AppError('Cidade not Found');
@@ -24,6 +25,7 @@ class UpdateCidadesService {
 
     cidade.nome = nome;
     cidade.slug = slug(nome);
+    cidade.status = status;
 
     await this.cidadesRepository.save(cidade);
     return cidade;

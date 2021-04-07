@@ -30,12 +30,13 @@ export default class PublicoController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const { nome } = request.body;
+    const { nome, status } = request.body;
     const updatePublico = container.resolve(UpdatePublicoService);
 
     const publico = await updatePublico.execute({
       id,
       nome,
+      status,
     });
 
     return response.json({ publico: classToClass(publico) });

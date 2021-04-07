@@ -9,6 +9,7 @@ interface IRequest {
   id: string;
   nome: string;
   superiores_id: string;
+  status: boolean;
 }
 @injectable()
 class UpdateOrgaosService {
@@ -17,7 +18,12 @@ class UpdateOrgaosService {
     private orgaosRepository: IOrgaosRepository,
   ) {}
 
-  public async execute({ id, nome, superiores_id }: IRequest): Promise<Orgao> {
+  public async execute({
+    id,
+    nome,
+    superiores_id,
+    status,
+  }: IRequest): Promise<Orgao> {
     const orgao = await this.orgaosRepository.findById(id);
     if (!orgao) {
       throw new AppError('Orgao not Found');
@@ -26,6 +32,7 @@ class UpdateOrgaosService {
     orgao.nome = nome;
     orgao.slug = slug(nome);
     orgao.superiores_id = superiores_id;
+    orgao.status = status;
 
     await this.orgaosRepository.save(orgao);
     return orgao;

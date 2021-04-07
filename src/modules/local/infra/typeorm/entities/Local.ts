@@ -48,6 +48,9 @@ class Local {
 
   @Column('boolean', { default: true })
   status: boolean;
+
+  @Column()
+  conteudo: string;
 }
 
 export default Local;

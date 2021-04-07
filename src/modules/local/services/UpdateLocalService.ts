@@ -10,6 +10,8 @@ interface IRequest {
   nome: string;
   orgao_id: string;
   cidade_id: string;
+  conteudo: string;
+  status: boolean;
 }
 @injectable()
 class UpdateLocalService {
@@ -23,6 +25,8 @@ class UpdateLocalService {
     nome,
     cidade_id,
     orgao_id,
+    conteudo,
+    status,
   }: IRequest): Promise<Local> {
     const local = await this.localRepository.findById(id);
     if (!local) {
@@ -33,6 +37,8 @@ class UpdateLocalService {
     local.slug = slug(nome);
     local.cidade_id = cidade_id;
     local.orgao_id = orgao_id;
+    local.conteudo = conteudo;
+    local.status = status;
 
     await this.localRepository.save(local);
     return local;
