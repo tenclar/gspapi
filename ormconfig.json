@@ -15,6 +15,7 @@
       "migrationsDir": "./src/shared/infra/typeorm/migrations"
     },
     "logging": true
+
   }
 
 ]

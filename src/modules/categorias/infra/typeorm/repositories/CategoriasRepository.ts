@@ -23,11 +23,13 @@ class CategoriasRepository implements ICategoriasRepository {
 
   async findById(id: string): Promise<Categoria | undefined> {
     const categoria = await this.ormRepository.findOne(id);
-    /*
-    , {
+    return categoria;
+  }
+
+  async findByIdRelationCategoria(id: string): Promise<Categoria | undefined> {
+    const categoria = await this.ormRepository.findOne(id, {
       relations: ['categoria'],
     }
-    */
     return categoria;
   }
 
@@ -56,15 +58,13 @@ class CategoriasRepository implements ICategoriasRepository {
     return listacategorias;
   }
 
-  async findAllss(): Promise<Categoria[]> {
+  async findAll(): Promise<Categoria[]> {
     const listacategorias = await this.ormRepository.find();
     return listacategorias;
   }
 
-  async findAll(): Promise<Categoria[]> {
-    const listacategorias = await this.ormRepository.find({
-      // relations: ['categorias'],
-    });
+  async findAllRecursive(): Promise<Categoria[]> {
+    const listacategorias = await this.ormRepository.find();
 
     function getNestedChildren(
       arr: Categoria[],

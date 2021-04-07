@@ -5,7 +5,8 @@ import { container } from 'tsyringe';
 import CreateCategoriaService from '@modules/categorias/services/CreateCategoriasService';
 import ShowCategoriaService from '@modules/categorias/services/ShowCategoriasService';
 import UpdateCategoriaService from '@modules/categorias/services/UpdateCategoriasService';
-import ListCategoriaService from '@modules/categorias/services/ListCategoriasService';
+import ListCategoriaLikeTituloService from '@modules/categorias/services/ListCategoriasLikeTituloService';
+import ListCategoriasService from '@modules/categorias/services/ListCategoriasService';
 
 export default class CategoriasController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -29,25 +30,37 @@ export default class CategoriasController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
-    const { titulo = '%' } = request.query;
+    const { titulo } = request.query;
+    let categorias = [];
+    if (titulo) {
+      const listCategorias = await container.resolve(
+        ListCategoriaLikeTituloService,
+      );
+      categorias = await listCategorias.execute({ titulo: String(titulo) });
+    } else {
+      const listCategorias = await container.resolve(ListCategoriasService);
+      categorias = await listCategorias.execute();
+    }
 
-    const listCategorias = await container.resolve(ListCategoriaService);
-    const categorias = await listCategorias.execute({ titulo: String(titulo) });
     return response.json({ categorias: classToClass(categorias) });
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const { titulo, categoria_id, status } = request.body;
+
+    const { titulo, categoria_id } = request.body;
+
+
     const updateCategoria = container.resolve(UpdateCategoriaService);
 
-    const user = await updateCategoria.execute({
+    const categoria = await updateCategoria.execute({
       id,
       titulo,
       categoria_id,
       status,
     });
-    // delete user.password;
-    return response.json({ categoria: classToClass(user) });
+    // delete categoria.categoria;
+    console.log(classToClass(categoria));
+    return response.json({ categoria: classToClass(categoria) });
   }
 }

@@ -25,7 +25,7 @@ export default class PublicoController {
     const { nome } = request.query;
     const listPublico = await container.resolve(ListPublicoService);
     const publico = await listPublico.execute({ nome: String(nome) });
-    return response.json({ publico: classToClass(publico) });
+    return response.json({ publicos: classToClass(publico) });
   }
 
   public async update(request: Request, response: Response): Promise<Response> {

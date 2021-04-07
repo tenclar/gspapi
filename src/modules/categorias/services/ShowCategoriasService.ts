@@ -16,7 +16,9 @@ class ShowProfileService {
   ) {}
 
   public async execute({ id }: IRequest): Promise<Categoria> {
-    const categoria = await this.categoriasRepository.findById(id);
+    const categoria = await this.categoriasRepository.findByIdRelationCategoria(
+      id,
+    );
     if (!categoria) {
       throw new AppError('Categoria not Found');
     }

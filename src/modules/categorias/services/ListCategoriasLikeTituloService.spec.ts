@@ -1,16 +1,18 @@
 import FakeCategoriasRepository from '@modules/categorias/repositories/fakes/FakeCategoriasRepository';
 // import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
-import ListProviderService from './ListCategoriasService';
+import ListCategoriasLikeTituloService from './ListCategoriasLikeTituloService';
 
 let fakeCategoriasRepository: FakeCategoriasRepository;
 // let fakeCacheProvider: FakeCacheProvider;
-let listProviders: ListProviderService;
+let listProviders: ListCategoriasLikeTituloService;
 
 describe('ListProviderService', () => {
   beforeEach(() => {
     fakeCategoriasRepository = new FakeCategoriasRepository();
     //  fakeCacheProvider = new FakeCacheProvider();
-    listProviders = new ListProviderService(fakeCategoriasRepository);
+    listProviders = new ListCategoriasLikeTituloService(
+      fakeCategoriasRepository,
+    );
   });
 
   // fakeCacheProvider,
@@ -26,7 +28,7 @@ describe('ListProviderService', () => {
       categoria_id: '123',
     });
 
-    const providers = await listProviders.execute();
+    const providers = await listProviders.execute({ titulo: 'J' });
     expect(providers).toEqual([categoria1, categoria2]);
   });
 });

@@ -22,7 +22,6 @@ class UpdateCategoriasService {
     id,
     titulo,
     categoria_id,
-    status,
   }: IRequest): Promise<Categoria> {
     const categoria = await this.categoriasRepository.findById(id);
     if (!categoria) {
@@ -32,8 +31,7 @@ class UpdateCategoriasService {
     categoria.titulo = titulo;
     categoria.slug = slug(titulo);
     if (categoria_id) categoria.categoria_id = categoria_id;
-    categoria.status = status;
-
+    categoria.categoria_id = categoria_id || null;
     await this.categoriasRepository.save(categoria);
     return categoria;
   }

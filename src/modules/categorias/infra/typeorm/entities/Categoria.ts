@@ -15,7 +15,7 @@ class Categoria {
   id: string;
 
   @Column({ nullable: true })
-  categoria_id: string;
+  categoria_id: string | null;
 
   @Column()
   titulo: string;
