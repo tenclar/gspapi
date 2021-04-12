@@ -13,7 +13,7 @@ categoriaRouter.post(
   celebrate({
     [Segments.BODY]: {
       titulo: Joi.string().required(),
-      categoria_id: Joi.string(),
+      categoria_id: Joi.allow(),
     },
   }),
   categoriasController.create,
@@ -25,10 +25,8 @@ categoriaRouter.put(
       id: Joi.string().uuid().required(),
     },
     [Segments.BODY]: {
-
       titulo: Joi.string().required(),
       categoria_id: Joi.allow(),
-
     },
   }),
   categoriasController.update,
