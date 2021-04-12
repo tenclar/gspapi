@@ -12,7 +12,7 @@ informacaoRouter.post(
     [Segments.BODY]: {
       titulo: Joi.string().required(),
       conteudo: Joi.string(),
-      imagem: Joi.string(),
+      imagem: Joi.allow(),
       status: Joi.boolean().required(),
     },
   }),
@@ -27,7 +27,7 @@ informacaoRouter.put(
     [Segments.BODY]: {
       titulo: Joi.string().required(),
       conteudo: Joi.string(),
-      imagem: Joi.string(),
+      imagem: Joi.allow(),
       status: Joi.boolean().required(),
     },
   }),
