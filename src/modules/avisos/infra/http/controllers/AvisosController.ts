@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import CreateAvisosService from '@modules/avisos/services/CreateAvisosService';
 import ShowAvisosService from '@modules/avisos/services/ShowAvisosService';
 import ListAvisosService from '@modules/avisos/services/ListAvisosService';
+import ListAvisosLikeTituloService from '@modules/avisos/services/ListAvisosLikeTituloService';
 import UpdateAvisosService from '@modules/avisos/services/UpdateAvisosService';
 
 export default class AvisoController {
@@ -28,8 +29,15 @@ export default class AvisoController {
 
   public async index(request: Request, response: Response): Promise<Response> {
     const { titulo } = request.query;
-    const listAvisos = await container.resolve(ListAvisosService);
-    const avisos = await listAvisos.execute({ titulo: String(titulo) });
+    let avisos = [];
+    if (titulo) {
+      const listAvisos = await container.resolve(ListAvisosLikeTituloService);
+      avisos = await listAvisos.execute({ titulo: String(titulo) });
+    } else {
+      const listAvisos = await container.resolve(ListAvisosService);
+      avisos = await listAvisos.execute();
+    }
+
     return response.json({ avisos: classToClass(avisos) });
   }
 

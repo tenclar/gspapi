@@ -3,6 +3,10 @@ import { injectable, inject } from 'tsyringe';
 import Aviso from '@modules/avisos/infra/typeorm/entities/Aviso';
 import IAvisosRepository from '@modules/avisos/repositories/IAvisosRepository';
 
+interface IRequest {
+  titulo?: string;
+}
+
 @injectable()
 class ListAvisosService {
   constructor(
@@ -10,8 +14,8 @@ class ListAvisosService {
     private avisosRepository: IAvisosRepository,
   ) {}
 
-  public async execute(): Promise<Aviso[]> {
-    const avisos = await this.avisosRepository.findAll();
+  public async execute({ titulo }: IRequest): Promise<Aviso[]> {
+    const avisos = await this.avisosRepository.findAllLikeTitulo(titulo);
 
     return avisos;
   }
