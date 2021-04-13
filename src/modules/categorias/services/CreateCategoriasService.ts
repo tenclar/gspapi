@@ -8,6 +8,7 @@ import ICategoriasRepository from '../repositories/ICategoriasRepository';
 interface IRequest {
   titulo: string;
   categoria_id: string;
+  status: boolean;
 }
 @injectable()
 class CreateCategoriaService {
@@ -16,7 +17,11 @@ class CreateCategoriaService {
     private categoriasRepository: ICategoriasRepository,
   ) {}
 
-  public async execute({ titulo, categoria_id }: IRequest): Promise<Categoria> {
+  public async execute({
+    titulo,
+    categoria_id,
+    status,
+  }: IRequest): Promise<Categoria> {
     const checkCategoriaExists = await this.categoriasRepository.findByTituloAndId(
       titulo,
       categoria_id,
@@ -29,6 +34,7 @@ class CreateCategoriaService {
       titulo,
       slug: slug(titulo),
       categoria_id,
+      status,
     });
     await this.categoriasRepository.save(categoria);
 

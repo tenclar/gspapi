@@ -104,6 +104,49 @@ class CategoriasRepository implements ICategoriasRepository {
     return lista;
   }
 
+  async findAllRecursiveLikeTitulo(titulo: string): Promise<Categoria[]> {
+    const listacategorias = await this.ormRepository.find({
+      where: { titulo: Raw(alias => `${alias} ILIKE '%${titulo}%'`) },
+    });
+
+    function getNestedChildren(
+      arr: Categoria[],
+      parent: string | null,
+      prof: number,
+    ) {
+      const out: Categoria[] = [];
+      let cont = prof;
+      cont += 1;
+
+      arr.forEach(elem => {
+        if (elem.categoria_id === parent) {
+          const categoria = elem;
+          if (cont > 0) {
+            let c = 0;
+            while (c < cont) {
+              categoria.titulo = `---${categoria.titulo}`;
+
+              c += 1;
+            }
+          }
+          out.push(elem);
+          const subcategorias = getNestedChildren(arr, elem.id, cont);
+
+          if (subcategorias.length) {
+            subcategorias.forEach(subc => {
+              out.push(subc);
+            });
+          }
+        }
+      });
+
+      return out;
+    }
+
+    const lista = getNestedChildren(listacategorias, null, -1);
+    return lista;
+  }
+
   async findAlls(): Promise<Categoria[]> {
     const categorias = await this.ormRepository
       .createQueryBuilder('categoria')
