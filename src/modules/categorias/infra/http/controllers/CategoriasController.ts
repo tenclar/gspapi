@@ -10,12 +10,13 @@ import ListCategoriasService from '@modules/categorias/services/ListCategoriasSe
 
 export default class CategoriasController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { titulo, categoria_id } = request.body;
+    const { titulo, categoria_id, status } = request.body;
 
     const createCategoria = container.resolve(CreateCategoriaService);
     const categoria = await createCategoria.execute({
       titulo,
       categoria_id,
+      status,
     });
 
     return response.json({ categoria: classToClass(categoria) });
@@ -31,6 +32,7 @@ export default class CategoriasController {
 
   public async index(request: Request, response: Response): Promise<Response> {
     const { titulo } = request.query;
+    console.log(titulo);
     let categorias = [];
     if (titulo) {
       const listCategorias = await container.resolve(
@@ -48,8 +50,7 @@ export default class CategoriasController {
   public async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
-    const { titulo, categoria_id } = request.body;
-
+    const { titulo, categoria_id, status } = request.body;
 
     const updateCategoria = container.resolve(UpdateCategoriaService);
 
@@ -60,7 +61,7 @@ export default class CategoriasController {
       status,
     });
     // delete categoria.categoria;
-    console.log(classToClass(categoria));
+    // console.log(classToClass(categoria));
     return response.json({ categoria: classToClass(categoria) });
   }
 }
