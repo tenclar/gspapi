@@ -41,7 +41,7 @@ export default class CreateAviso1614367910411 implements MigrationInterface {
           },
           {
             name: 'imagem',
-            type: 'varchar',
+            type: 'text',
             isNullable: true,
           },
           {

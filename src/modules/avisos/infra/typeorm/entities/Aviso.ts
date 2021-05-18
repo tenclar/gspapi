@@ -14,7 +14,7 @@ class Aviso {
   @Column()
   titulo: string;
 
-  @Column()
+  @Column('text')
   conteudo?: string;
 
   @Column()
@@ -26,7 +26,7 @@ class Aviso {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @Column()
+  @Column('text')
   imagem?: string;
 
   @Column('boolean', { default: true })
