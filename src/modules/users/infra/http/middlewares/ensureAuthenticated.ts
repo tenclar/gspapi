@@ -20,6 +20,9 @@ export default function ensureAuthenticated(
   }
 
   const [, token] = authHeader.split(' ');
+  if (!token) {
+    throw new AppError('Invalid JWT token');
+  }
 
   try {
     const decoded = verify(token, authConfg.jwt.secret);
