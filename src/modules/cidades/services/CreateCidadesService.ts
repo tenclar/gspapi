@@ -7,6 +7,7 @@ import ICidadesRepository from '../repositories/ICidadesRepository';
 
 interface IRequest {
   nome: string;
+  status: boolean;
 }
 
 @injectable()
@@ -16,7 +17,7 @@ class CreateCidadesService {
     private cidadesRepository: ICidadesRepository,
   ) {}
 
-  public async execute({ nome }: IRequest): Promise<Cidade> {
+  public async execute({ nome, status }: IRequest): Promise<Cidade> {
     const checkCidadesExists = await this.cidadesRepository.findByNome(nome);
 
     if (checkCidadesExists) {
@@ -24,6 +25,7 @@ class CreateCidadesService {
     }
     const cidade = await this.cidadesRepository.create({
       nome,
+      status,
       slug: slug(nome),
     });
     await this.cidadesRepository.save(cidade);
