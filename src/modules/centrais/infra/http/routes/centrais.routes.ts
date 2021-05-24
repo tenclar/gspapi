@@ -24,6 +24,7 @@ centralRouter.put(
     },
     [Segments.BODY]: {
       nome: Joi.string().required(),
+      status: Joi.boolean().required(),
     },
   }),
   centraisController.update,
