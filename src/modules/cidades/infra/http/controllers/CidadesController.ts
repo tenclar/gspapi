@@ -8,9 +8,9 @@ import UpdateCidadesService from '@modules/cidades/services/UpdateCidadesService
 
 export default class CidadeController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { nome } = request.body;
+    const { nome, status } = request.body;
     const CreateCidade = container.resolve(CreateCidadesService);
-    const cidade = await CreateCidade.execute({ nome });
+    const cidade = await CreateCidade.execute({ nome, status });
     return response.json({ cidade: classToClass(cidade) });
   }
 
