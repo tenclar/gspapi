@@ -18,11 +18,13 @@ describe('UpdateCentrais', () => {
     const central = await fakeCentraisRepository.create({
       nome: 'Rio Branco',
       slug: 'rio-branco',
+      status: true,
     });
 
     const updateCentral = await updateCentrais.execute({
       id: central.id,
       nome: 'Rios Brancos',
+      status: true,
     });
 
     expect(updateCentral.nome).toBe('Rios Brancos');
@@ -34,6 +36,7 @@ describe('UpdateCentrais', () => {
       updateCentrais.execute({
         id: 'non-existing-centrais-id',
         nome: 'Test',
+        status: true,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

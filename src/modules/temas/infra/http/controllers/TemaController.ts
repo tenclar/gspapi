@@ -8,9 +8,9 @@ import UpdateTemaService from '@modules/temas/services/UpdateTemaService';
 
 export default class TemaController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { nome, status, slug } = request.body;
+    const { nome, status } = request.body;
     const CreateTema = container.resolve(CreateTemaService);
-    const tema = await CreateTema.execute({ nome, status, slug });
+    const tema = await CreateTema.execute({ nome, status });
     return response.json({ publico: classToClass(tema) });
   }
 

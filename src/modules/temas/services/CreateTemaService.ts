@@ -7,7 +7,6 @@ import ITemaRepository from '../repositories/ITemaRepository';
 
 interface IRequest {
   nome: string;
-  slug: string;
   status: boolean;
 }
 
@@ -18,7 +17,7 @@ class CreateTemaService {
     private temaRepository: ITemaRepository,
   ) {}
 
-  public async execute({ nome, slug, status }: IRequest): Promise<Tema> {
+  public async execute({ nome, status }: IRequest): Promise<Tema> {
     const checkTemaExists = await this.temaRepository.findByNome(nome);
 
     if (checkTemaExists) {

@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import CreateSuperioresService from '@modules/superiores/services/CreateSuperioresService';
 import ShowSuperioreservice from '@modules/superiores/services/ShowSuperioresService';
 import ListSuperioresService from '@modules/superiores/services/ListSuperioresService';
+import ListSuperioresLikeNomeService from '@modules/superiores/services/ListSuperioresLikeNomeService';
 import UpdateSuperioresService from '@modules/superiores/services/UpdateSuperioresService';
 
 export default class SuperioresController {
@@ -23,8 +24,16 @@ export default class SuperioresController {
 
   public async index(request: Request, response: Response): Promise<Response> {
     const { nome } = request.query;
-    const listSuperiores = await container.resolve(ListSuperioresService);
-    const superiores = await listSuperiores.execute({ nome: String(nome) });
+    let superiores = null;
+    if (nome) {
+      const listSuperiores = await container.resolve(
+        ListSuperioresLikeNomeService,
+      );
+      superiores = await listSuperiores.execute({ nome: String(nome) });
+    } else {
+      const listSuperiores = await container.resolve(ListSuperioresService);
+      superiores = await listSuperiores.execute();
+    }
     return response.json({ superiores: classToClass(superiores) });
   }
 

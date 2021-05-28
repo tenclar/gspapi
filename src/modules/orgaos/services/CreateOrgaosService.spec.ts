@@ -15,6 +15,7 @@ describe('CreateOrgaos', () => {
     const orgao = await createOrgaos.execute({
       nome: 'Instituto de Identificacao',
       superiores_id: '12',
+      status: true,
     });
     expect(orgao).toHaveProperty('id');
   });
@@ -23,12 +24,14 @@ describe('CreateOrgaos', () => {
     await createOrgaos.execute({
       nome: 'Instituto de Identificacao',
       superiores_id: '12',
+      status: true,
     });
 
     expect(
       createOrgaos.execute({
         nome: 'Instituto de Identificacao',
         superiores_id: '12',
+        status: true,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

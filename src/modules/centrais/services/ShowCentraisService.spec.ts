@@ -17,6 +17,7 @@ describe('ShowCentraisService', () => {
     const centraishow = await fakeCentraisRepository.create({
       nome: 'Rio Branco',
       slug: 'rio-branco',
+      status: false,
     });
 
     const central = await showCentrais.execute({

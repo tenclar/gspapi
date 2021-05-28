@@ -18,6 +18,7 @@ describe('ShowOrgaosService', () => {
       nome: 'Estado do Acre',
       slug: 'estado-do-acre',
       superiores_id: '1',
+      status: true,
     });
 
     const orgao = await showOrgaos.execute({

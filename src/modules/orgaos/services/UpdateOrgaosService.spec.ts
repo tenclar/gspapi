@@ -19,12 +19,14 @@ describe('UpdateOrgaos', () => {
       nome: 'Estado do Acre',
       slug: 'estado-do-acre',
       superiores_id: '1',
+      status: true,
     });
 
     const updateOrgao = await updateOrgaos.execute({
       id: orgao.id,
       nome: 'Secretaria do Acre',
       superiores_id: '2',
+      status: true,
     });
 
     expect(updateOrgao.nome).toBe('Secretaria do Acre');
@@ -38,6 +40,7 @@ describe('UpdateOrgaos', () => {
         id: 'non-existing-orgaos-id',
         nome: 'Test',
         superiores_id: 'test',
+        status: true,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
