@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import CreateCentraisService from '@modules/centrais/services/CreateCentraisService';
 import ShowCentraisService from '@modules/centrais/services/ShowCentraisService';
 import ListCentraisService from '@modules/centrais/services/ListCentraisService';
+import ListCentraisLikeNomeService from '@modules/centrais/services/ListCentraisLikeNomeService';
 import UpdateCentraisService from '@modules/centrais/services/UpdateCentraisService';
 
 export default class CentralController {
@@ -23,8 +24,16 @@ export default class CentralController {
 
   public async index(request: Request, response: Response): Promise<Response> {
     const { nome } = request.query;
-    const listCentrais = await container.resolve(ListCentraisService);
-    const centrais = await listCentrais.execute({ nome: String(nome) });
+    let centrais = null;
+
+    if (nome) {
+      const listcentrais = await container.resolve(ListCentraisLikeNomeService);
+      centrais = await listcentrais.execute({ nome: String(nome) });
+    } else {
+      const listCentrais = await container.resolve(ListCentraisService);
+      centrais = await listCentrais.execute();
+    }
+
     return response.json({ centrais: classToClass(centrais) });
   }
 

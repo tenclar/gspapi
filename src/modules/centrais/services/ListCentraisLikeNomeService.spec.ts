@@ -1,19 +1,19 @@
 import FakeCentraisRepository from '@modules/centrais/repositories/fakes/FakeCentraisRepository';
 
-import ListCentraisService from './ListCentraisService';
+import ListCentraisLikeNomeService from './ListCentraisLikeNomeService';
 
 let fakeCentraisRepository: FakeCentraisRepository;
 
-let listCentrais: ListCentraisService;
+let listCentrais: ListCentraisLikeNomeService;
 
-describe('ListCentraiservice', () => {
+describe('ListCentraisLikeNomeService', () => {
   beforeEach(() => {
     fakeCentraisRepository = new FakeCentraisRepository();
 
-    listCentrais = new ListCentraisService(fakeCentraisRepository);
+    listCentrais = new ListCentraisLikeNomeService(fakeCentraisRepository);
   });
 
-  it('should not be able to List the providers', async () => {
+  it('should not be able to List the Centrais Like nome', async () => {
     const central1 = await fakeCentraisRepository.create({
       nome: 'Rio Branco',
       slug: 'rio-branco',
@@ -25,7 +25,7 @@ describe('ListCentraiservice', () => {
       status: true,
     });
 
-    const centrais = await listCentrais.execute();
+    const centrais = await listCentrais.execute({ nome: 'R' });
     expect(centrais).toEqual([central1, central2]);
   });
 });

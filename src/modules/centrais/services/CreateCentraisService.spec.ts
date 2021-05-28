@@ -14,6 +14,7 @@ describe('CreateCentrais', () => {
   it('should be able to create a new central', async () => {
     const central = await createCentrais.execute({
       nome: 'Rio Branco',
+      status: true,
     });
     expect(central).toHaveProperty('id');
   });
@@ -21,11 +22,13 @@ describe('CreateCentrais', () => {
   it('should not be able to create central with nome match', async () => {
     await createCentrais.execute({
       nome: 'Rio Branco',
+      status: true,
     });
 
     expect(
       createCentrais.execute({
         nome: 'Rio Branco',
+        status: true,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
