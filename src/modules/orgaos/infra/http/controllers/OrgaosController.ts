@@ -4,6 +4,8 @@ import { container } from 'tsyringe';
 import CreateOrgaosService from '@modules/orgaos/services/CreateOrgaosService';
 import ShowOrgaoservice from '@modules/orgaos/services/ShowOrgaosService';
 import ListOrgaosService from '@modules/orgaos/services/ListOrgaosService';
+import ListOrgaosLikeNomeService from '@modules/orgaos/services/ListOrgaosLikeNomeService';
+
 import UpdateOrgaosService from '@modules/orgaos/services/UpdateOrgaosService';
 
 export default class OrgaosController {
@@ -23,8 +25,15 @@ export default class OrgaosController {
 
   public async index(request: Request, response: Response): Promise<Response> {
     const { nome } = request.query;
-    const listOrgaos = await container.resolve(ListOrgaosService);
-    const orgaos = await listOrgaos.execute({ nome: String(nome) });
+    let orgaos = null;
+    if (nome) {
+      const listOrgaos = await container.resolve(ListOrgaosLikeNomeService);
+      orgaos = await listOrgaos.execute({ nome: String(nome) });
+    } else {
+      const listOrgaos = await container.resolve(ListOrgaosService);
+      orgaos = await listOrgaos.execute();
+    }
+
     return response.json({ orgaos: classToClass(orgaos) });
   }
 

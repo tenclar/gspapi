@@ -1,16 +1,16 @@
 import FakeOrgaosRepository from '@modules/orgaos/repositories/fakes/FakeOrgaosRepository';
 
-import ListOrgaosService from './ListOrgaosService';
+import ListOrgaosLikeNomeService from './ListOrgaosLikeNomeService';
 
 let fakeOrgaosRepository: FakeOrgaosRepository;
 
-let listOrgaos: ListOrgaosService;
+let listOrgaos: ListOrgaosLikeNomeService;
 
-describe('ListOrgaoService', () => {
+describe('ListOrgaoLikeNomeService', () => {
   beforeEach(() => {
     fakeOrgaosRepository = new FakeOrgaosRepository();
 
-    listOrgaos = new ListOrgaosService(fakeOrgaosRepository);
+    listOrgaos = new ListOrgaosLikeNomeService(fakeOrgaosRepository);
   });
 
   it('should not be able to List the providers', async () => {
@@ -27,7 +27,7 @@ describe('ListOrgaoService', () => {
       status: true,
     });
 
-    const orgaos = await listOrgaos.execute();
+    const orgaos = await listOrgaos.execute({ nome: 'I' });
     expect(orgaos).toEqual([orgao1, orgao2]);
   });
 });

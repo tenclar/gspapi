@@ -3,18 +3,22 @@ import { injectable, inject } from 'tsyringe';
 import Orgao from '@modules/orgaos/infra/typeorm/entities/Orgaos';
 import IOrgaosRepository from '@modules/orgaos/repositories/IOrgaosRepository';
 
+interface IRequest {
+  nome: string;
+}
+
 @injectable()
-class ListOrgaosService {
+class ListOrgaosLikeNomeService {
   constructor(
     @inject('OrgaosRepository')
     private orgaosRepository: IOrgaosRepository,
   ) {}
 
-  public async execute(): Promise<Orgao[]> {
-    const orgaos = await this.orgaosRepository.findAll();
+  public async execute({ nome }: IRequest): Promise<Orgao[]> {
+    const orgaos = await this.orgaosRepository.findAllLikeNome(nome);
 
     return orgaos;
   }
 }
 
-export default ListOrgaosService;
+export default ListOrgaosLikeNomeService;
