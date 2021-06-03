@@ -12,7 +12,9 @@ class LocalRepository implements ILocalRepository {
   }
 
   async findById(id: string): Promise<Local | undefined> {
-    const local = await this.ormRepository.findOne(id);
+    const local = await this.ormRepository.findOne(id, {
+      relations: ['cidade', 'orgao'],
+    });
     return local;
   }
 
