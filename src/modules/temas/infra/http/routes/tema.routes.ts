@@ -11,6 +11,7 @@ temaRouter.post(
   celebrate({
     [Segments.BODY]: {
       nome: Joi.string().required(),
+      status: Joi.boolean(),
     },
   }),
   temaController.create,
@@ -23,6 +24,7 @@ temaRouter.put(
     },
     [Segments.BODY]: {
       nome: Joi.string().required(),
+      status: Joi.boolean(),
     },
   }),
   temaController.update,

@@ -13,22 +13,22 @@ interface IRequest {
 @injectable()
 class CreateTemaService {
   constructor(
-    @inject('TemaRepository')
-    private temaRepository: ITemaRepository,
+    @inject('TemasRepository')
+    private temasRepository: ITemaRepository,
   ) {}
 
   public async execute({ nome, status }: IRequest): Promise<Tema> {
-    const checkTemaExists = await this.temaRepository.findByNome(nome);
+    const checkTemaExists = await this.temasRepository.findByNome(nome);
 
     if (checkTemaExists) {
       throw new AppError('TEMA já está sendo usado.');
     }
-    const tema = await this.temaRepository.create({
+    const tema = await this.temasRepository.create({
       nome,
       slug: slug(nome),
       status,
     });
-    await this.temaRepository.save(tema);
+    await this.temasRepository.save(tema);
     return tema;
   }
 }

@@ -30,12 +30,13 @@ export default class TemaController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const { nome } = request.body;
+    const { nome, status } = request.body;
     const updateTema = container.resolve(UpdateTemaService);
 
     const tema = await updateTema.execute({
       id,
       nome,
+      status,
     });
 
     return response.json({ tema: classToClass(tema) });

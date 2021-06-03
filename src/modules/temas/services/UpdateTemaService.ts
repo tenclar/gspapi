@@ -8,15 +8,16 @@ import ITemaRepository from '@modules/temas/repositories/ITemaRepository';
 interface IRequest {
   id: string;
   nome: string;
+  status: boolean;
 }
 @injectable()
 class UpdateTemaService {
   constructor(
-    @inject('temaRepository')
+    @inject('TemasRepository')
     private temaRepository: ITemaRepository,
   ) {}
 
-  public async execute({ id, nome }: IRequest): Promise<Tema> {
+  public async execute({ id, nome, status }: IRequest): Promise<Tema> {
     const tema = await this.temaRepository.findById(id);
     if (!tema) {
       throw new AppError('TEMA não encontrado');
@@ -24,6 +25,7 @@ class UpdateTemaService {
 
     tema.nome = nome;
     tema.slug = slug(nome);
+    tema.status = status;
 
     await this.temaRepository.save(tema);
     return tema;

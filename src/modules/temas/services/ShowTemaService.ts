@@ -12,7 +12,7 @@ interface IRequest {
 @injectable()
 class ShowTemaService {
   constructor(
-    @inject('temaRepository')
+    @inject('TemasRepository')
     private temaRepository: ITemaRepository,
   ) {}
 
