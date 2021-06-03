@@ -15,6 +15,7 @@ import informacoesRouter from '@modules/informacoes/infra/http/routes/informacoe
 import centraisRouter from '@modules/centrais/infra/http/routes/centrais.routes';
 import publicosRouter from '@modules/publicos/infra/http/routes/publico.routes';
 import temasRouter from '@modules/temas/infra/http/routes/tema.routes';
+import tagsRouter from '@modules/tags/infra/http/routes/tags.routes';
 
 const routes = Router();
 
@@ -38,5 +39,6 @@ routes.use('/servicos', servicosRouter);
 routes.use('/superiores', superioresRouter);
 routes.use('/publicos', publicosRouter);
 routes.use('/temas', temasRouter);
+routes.use('/tags', tagsRouter);
 
 export default routes;

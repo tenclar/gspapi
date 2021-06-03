@@ -45,6 +45,9 @@ import PracasRepository from '@modules/pracas/infra/typeorm/repositories/PracasR
 import ITemasRepository from '@modules/temas/repositories/ITemaRepository';
 import TemasRepository from '@modules/temas/infra/typeorm/repositories/TemaRepository';
 
+import ITagsRepository from '@modules/tags/repositories/ITagRepository';
+import TagsRepository from '@modules/tags/infra/typeorm/repositories/TagRepository';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -108,3 +111,5 @@ container.registerSingleton<ITemasRepository>(
   'TemasRepository',
   TemasRepository,
 );
+
+container.registerSingleton<ITagsRepository>('TagsRepository', TagsRepository);
