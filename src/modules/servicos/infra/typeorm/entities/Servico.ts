@@ -16,6 +16,7 @@ import {
   JoinTable,
   OneToMany,
 } from 'typeorm';
+import ServicosTags from './ServicosTags';
 
 @Entity('servicos')
 class Servico {
@@ -77,6 +78,12 @@ class Servico {
   })
   @JoinTable()
   temas: ServicosTemas[];
+
+  @OneToMany(() => ServicosTags, tags => tags.servico, {
+    cascade: true,
+  })
+  @JoinTable()
+  tags: ServicosTags[];
 }
 
 export default Servico;
