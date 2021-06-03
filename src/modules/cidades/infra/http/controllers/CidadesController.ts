@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import CreateCidadesService from '@modules/cidades/services/CreateCidadesService';
 import ShowCidadesService from '@modules/cidades/services/ShowCidadesService';
 import ListCidadesService from '@modules/cidades/services/ListCidadesService';
+import ListCidadesLikeNomeService from '@modules/cidades/services/ListCidadesLikeNomeService';
 import UpdateCidadesService from '@modules/cidades/services/UpdateCidadesService';
 
 export default class CidadeController {
@@ -23,8 +24,15 @@ export default class CidadeController {
 
   public async index(request: Request, response: Response): Promise<Response> {
     const { nome } = request.query;
-    const listCidades = await container.resolve(ListCidadesService);
-    const cidades = await listCidades.execute({ nome: String(nome) });
+    let cidades = null;
+    if (nome) {
+      const listCidades = await container.resolve(ListCidadesLikeNomeService);
+      cidades = await listCidades.execute({ nome: String(nome) });
+    } else {
+      const listCidades = await container.resolve(ListCidadesService);
+      cidades = await listCidades.execute();
+    }
+
     return response.json({ cidades: classToClass(cidades) });
   }
 

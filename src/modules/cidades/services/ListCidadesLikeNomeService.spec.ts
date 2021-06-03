@@ -1,16 +1,16 @@
 import FakeCidadesRepository from '@modules/cidades/repositories/fakes/FakeCidadesRepository';
 
-import ListCidadesService from './ListCidadesService';
+import ListCidadesLikeNomeService from './ListCidadesLikeNomeService';
 
 let fakeCidadesRepository: FakeCidadesRepository;
 
-let listCidades: ListCidadesService;
+let listCidades: ListCidadesLikeNomeService;
 
 describe('ListCidadeService', () => {
   beforeEach(() => {
     fakeCidadesRepository = new FakeCidadesRepository();
 
-    listCidades = new ListCidadesService(fakeCidadesRepository);
+    listCidades = new ListCidadesLikeNomeService(fakeCidadesRepository);
   });
 
   it('should not be able to List the providers', async () => {
@@ -25,7 +25,7 @@ describe('ListCidadeService', () => {
       status: true,
     });
 
-    const cidades = await listCidades.execute();
+    const cidades = await listCidades.execute({ nome: 'R' });
     expect(cidades).toEqual([cidade1, cidade2]);
   });
 });
