@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import CreatePracasService from '@modules/pracas/services/CreatePracasService';
 import ShowPracasService from '@modules/pracas/services/ShowPracasService';
 import ListPracasService from '@modules/pracas/services/ListPracasService';
+import ListPracasLikeNomeService from '@modules/pracas/services/ListPracasLikeNomeService';
 import UpdatePracasService from '@modules/pracas/services/UpdatePracasService';
 
 export default class PracaController {
@@ -23,8 +24,15 @@ export default class PracaController {
 
   public async index(request: Request, response: Response): Promise<Response> {
     const { nome } = request.query;
-    const listPracas = await container.resolve(ListPracasService);
-    const pracas = await listPracas.execute({ nome: String(nome) });
+    let pracas = null;
+    if (nome) {
+      const listPracas = await container.resolve(ListPracasLikeNomeService);
+      pracas = await listPracas.execute({ nome: String(nome) });
+    } else {
+      const listPracas = await container.resolve(ListPracasService);
+      pracas = await listPracas.execute();
+    }
+
     return response.json({ pracas: classToClass(pracas) });
   }
 

@@ -15,7 +15,8 @@ describe('ShowPracasService', () => {
 
   it('should be able to show the Pracas', async () => {
     const pracashow = await fakePracasRepository.create({
-      nome: 'Rio Branco',
+      nome: 'Laranja',
+      slug: 'Laranja',
       status: true,
     });
 
@@ -23,8 +24,8 @@ describe('ShowPracasService', () => {
       id: pracashow.id,
     });
 
-    expect(praca.nome).toBe('Rio Branco');
-    expect(praca.slug).toBe('rio-branco');
+    expect(praca.nome).toBe('Laranja');
+    expect(praca.slug).toBe('laranja');
   });
 
   it('should not be able show the Pracas from non-existing Pracas', async () => {

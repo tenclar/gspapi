@@ -3,6 +3,9 @@ import { injectable, inject } from 'tsyringe';
 import Praca from '@modules/pracas/infra/typeorm/entities/Praca';
 import IPracasRepository from '@modules/pracas/repositories/IPracasRepository';
 
+interface IRequest {
+  nome: string;
+}
 @injectable()
 class ListPracasService {
   constructor(
@@ -10,8 +13,8 @@ class ListPracasService {
     private pracasRepository: IPracasRepository,
   ) {}
 
-  public async execute(): Promise<Praca[]> {
-    const pracas = await this.pracasRepository.findAll();
+  public async execute({ nome }: IRequest): Promise<Praca[]> {
+    const pracas = await this.pracasRepository.findAllLikeNome(nome);
 
     return pracas;
   }

@@ -18,11 +18,13 @@ describe('UpdatePracas', () => {
     const praca = await fakePracasRepository.create({
       nome: 'Rio Branco',
       slug: 'rio-branco',
+      status: true,
     });
 
     const updatePraca = await updatePracas.execute({
       id: praca.id,
       nome: 'Rios Brancos',
+      status: true,
     });
 
     expect(updatePraca.nome).toBe('Rios Brancos');
@@ -34,6 +36,7 @@ describe('UpdatePracas', () => {
       updatePracas.execute({
         id: 'non-existing-pracas-id',
         nome: 'Test',
+        status: true,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

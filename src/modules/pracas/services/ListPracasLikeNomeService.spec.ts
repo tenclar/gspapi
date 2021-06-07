@@ -1,16 +1,16 @@
 import FakePracasRepository from '@modules/pracas/repositories/fakes/FakePracasRepository';
 
-import ListPracasService from './ListPracasService';
+import ListPracasLikeNomeService from './ListPracasLikeNomeService';
 
 let fakePracasRepository: FakePracasRepository;
 
-let listPracas: ListPracasService;
+let listPracas: ListPracasLikeNomeService;
 
 describe('ListPracaservice', () => {
   beforeEach(() => {
     fakePracasRepository = new FakePracasRepository();
 
-    listPracas = new ListPracasService(fakePracasRepository);
+    listPracas = new ListPracasLikeNomeService(fakePracasRepository);
   });
 
   it('should not be able to List the providers', async () => {
@@ -25,7 +25,7 @@ describe('ListPracaservice', () => {
       status: true,
     });
 
-    const pracas = await listPracas.execute();
+    const pracas = await listPracas.execute({ nome: 'R' });
     expect(pracas).toEqual([praca1, praca2]);
   });
 });
