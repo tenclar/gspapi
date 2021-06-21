@@ -24,6 +24,7 @@ pracaRouter.put(
     },
     [Segments.BODY]: {
       nome: Joi.string().required(),
+      status: Joi.boolean().required(),
     },
   }),
   pracasController.update,
