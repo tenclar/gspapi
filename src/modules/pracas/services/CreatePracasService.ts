@@ -5,9 +5,14 @@ import { injectable, inject } from 'tsyringe';
 
 import IPracasRepository from '../repositories/IPracasRepository';
 
+interface ICentral {
+  id: string;
+}
+
 interface IRequest {
   nome: string;
   status: boolean;
+  centrais: ICentral[];
 }
 
 @injectable()
@@ -17,7 +22,7 @@ class CreatePracasService {
     private pracasRepository: IPracasRepository,
   ) {}
 
-  public async execute({ nome, status }: IRequest): Promise<Praca> {
+  public async execute({ nome, status, centrais }: IRequest): Promise<Praca> {
     const checkPracasExists = await this.pracasRepository.findByNome(nome);
 
     if (checkPracasExists) {
@@ -27,6 +32,7 @@ class CreatePracasService {
       nome,
       slug: slug(nome),
       status,
+      centrais,
     });
     await this.pracasRepository.save(praca);
     return praca;

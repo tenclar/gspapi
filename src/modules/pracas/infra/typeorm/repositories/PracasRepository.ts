@@ -12,7 +12,9 @@ class PracasRepository implements IPracaRepository {
   }
 
   async findById(id: string): Promise<Praca | undefined> {
-    const praca = await this.ormRepository.findOne(id);
+    const praca = await this.ormRepository.findOne(id, {
+      relations: ['centrais'],
+    });
     return praca;
   }
 

@@ -1,5 +1,3 @@
-import Central from '@modules/centrais/infra/typeorm/entities/Central';
-
 import ServicosPracas from '@modules/servicos/infra/typeorm/entities/ServicosPracas';
 import {
   Column,
@@ -7,10 +5,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  ManyToMany,
-  JoinTable,
   OneToMany,
 } from 'typeorm';
+import PracasCentrais from './PracaCentrais';
 
 @Entity('pracas')
 class Praca {
@@ -32,12 +29,18 @@ class Praca {
   @Column('boolean', { default: true })
   status: boolean;
 
+  @OneToMany(() => PracasCentrais, centrais => centrais.praca, {
+    cascade: true,
+    eager: true,
+  })
+  centrais: PracasCentrais[];
+
   @OneToMany(() => ServicosPracas, servicospracas => servicospracas.praca)
   servicos: ServicosPracas[];
 
-  @ManyToMany(() => Central, central => central.pracas)
+  /*   @ManyToMany(() => Central, central => central.pracas)
   @JoinTable()
-  centrais: Central[];
+  centrais: Central[]; */
 }
 
 export default Praca;

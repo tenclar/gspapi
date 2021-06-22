@@ -12,6 +12,7 @@ pracaRouter.post(
     [Segments.BODY]: {
       nome: Joi.string().required(),
       status: Joi.boolean().required(),
+      centrais: Joi.array(),
     },
   }),
   pracasController.create,
@@ -25,6 +26,7 @@ pracaRouter.put(
     [Segments.BODY]: {
       nome: Joi.string().required(),
       status: Joi.boolean().required(),
+      centrais: Joi.array(),
     },
   }),
   pracasController.update,

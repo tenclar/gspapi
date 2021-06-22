@@ -5,10 +5,15 @@ import { injectable, inject } from 'tsyringe';
 
 import IPracasRepository from '@modules/pracas/repositories/IPracasRepository';
 
+interface ICentral {
+  id: string;
+  praca_id: string;
+}
 interface IRequest {
   id: string;
   nome: string;
   status: boolean;
+  centrais: ICentral[];
 }
 @injectable()
 class UpdatePracasService {
@@ -17,7 +22,12 @@ class UpdatePracasService {
     private pracasRepository: IPracasRepository,
   ) {}
 
-  public async execute({ id, nome, status }: IRequest): Promise<Praca> {
+  public async execute({
+    id,
+    nome,
+    status,
+    centrais,
+  }: IRequest): Promise<Praca> {
     const praca = await this.pracasRepository.findById(id);
     if (!praca) {
       throw new AppError('Praca not Found');
@@ -26,7 +36,8 @@ class UpdatePracasService {
     praca.nome = nome;
     praca.slug = slug(nome);
     praca.status = status;
-
+    /// const newCentrais = centrais.map(c => ({ centrais_id: c.id }));
+    if (centrais) praca.centrais = [...praca.centrais, ...centrais];
     await this.pracasRepository.save(praca);
     return praca;
   }

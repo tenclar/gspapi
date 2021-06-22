@@ -9,9 +9,9 @@ import UpdatePracasService from '@modules/pracas/services/UpdatePracasService';
 
 export default class PracaController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { nome, status } = request.body;
+    const { nome, status, centrais } = request.body;
     const CreatePraca = container.resolve(CreatePracasService);
-    const praca = await CreatePraca.execute({ nome, status });
+    const praca = await CreatePraca.execute({ nome, status, centrais });
     return response.json({ praca: classToClass(praca) });
   }
 
@@ -38,13 +38,14 @@ export default class PracaController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const { nome, status } = request.body;
+    const { nome, status, centrais } = request.body;
     const updatePracas = container.resolve(UpdatePracasService);
 
     const praca = await updatePracas.execute({
       id,
       nome,
       status,
+      centrais,
     });
 
     return response.json({ praca: classToClass(praca) });
