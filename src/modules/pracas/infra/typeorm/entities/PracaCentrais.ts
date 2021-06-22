@@ -21,7 +21,7 @@ class PracaCentrais {
   @Column()
   praca_id: string;
 
-  @ManyToOne(() => Central, central => central.pracas)
+  @ManyToOne(() => Central, central => central.pracas, { eager: true })
   @JoinColumn({ name: 'centrais_id' })
   central?: Central;
 
