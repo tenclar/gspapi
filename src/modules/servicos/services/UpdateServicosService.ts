@@ -32,7 +32,6 @@ interface IEtapa {
 interface IRequest {
   id: string;
   titulo: string;
-  slug: string;
   informacao: string;
   status: boolean;
   orgao_id: string;
@@ -81,7 +80,8 @@ class UpdateServicosService {
     servico.categoria_id = categoria_id;
     servico.informacao = informacao;
 
-    servico.publicos = [...servico.publicos, ...publicos];
+    if (publicos) servico.publicos = [...servico.publicos, ...publicos];
+
     /*  servico.locais = [...servico.locais, ...locais];
     servico.pracas = [...servico.pracas, ...pracas];
     servico.temas = [...servico.temas, ...temas];

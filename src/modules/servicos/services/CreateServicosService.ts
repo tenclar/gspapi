@@ -9,7 +9,7 @@ interface IPublico {
 }
 
 interface ILocal {
-  local_id: string;
+  locais_id: string;
 }
 
 interface IPraca {
