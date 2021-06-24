@@ -38,7 +38,7 @@ class UpdatePracasService {
     praca.slug = slug(nome);
     praca.status = status;
     /// const newCentrais = centrais.map(c => ({ centrais_id: c.id }));
-    praca.centrais = [...praca.centrais, ...centrais];
+    // praca.centrais = [...praca.centrais, ...centrais];
     // console.log(praca.centrais);
     // console.log([...praca.centrais, ...centrais]);
     praca.centrais = centrais;
