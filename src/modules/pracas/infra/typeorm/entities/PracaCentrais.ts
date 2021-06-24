@@ -21,11 +21,15 @@ class PracaCentrais {
   @Column()
   praca_id: string;
 
-  @ManyToOne(() => Central, central => central.pracas, { eager: true })
+  @ManyToOne(() => Central, central => central.pracas, {
+    eager: true,
+  })
   @JoinColumn({ name: 'centrais_id' })
   central?: Central;
 
-  @ManyToOne(() => Praca, praca => praca.centrais)
+  @ManyToOne(() => Praca, praca => praca.centrais, {
+    orphanedRowAction: 'delete',
+  })
   @JoinColumn({ name: 'praca_id' })
   praca?: Praca;
 

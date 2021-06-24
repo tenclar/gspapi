@@ -29,9 +29,8 @@ class Praca {
   @Column('boolean', { default: true })
   status: boolean;
 
-  @OneToMany(() => PracasCentrais, centrais => centrais.praca, {
+  @OneToMany(() => PracasCentrais, pracascentrais => pracascentrais.praca, {
     cascade: true,
-    eager: true,
   })
   centrais: PracasCentrais[];
 

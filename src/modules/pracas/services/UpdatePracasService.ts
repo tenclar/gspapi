@@ -8,6 +8,7 @@ import IPracasRepository from '@modules/pracas/repositories/IPracasRepository';
 interface ICentral {
   id: string;
   praca_id: string;
+  centrais_id: string;
 }
 interface IRequest {
   id: string;
@@ -37,7 +38,10 @@ class UpdatePracasService {
     praca.slug = slug(nome);
     praca.status = status;
     /// const newCentrais = centrais.map(c => ({ centrais_id: c.id }));
-    if (centrais) praca.centrais = [...praca.centrais, ...centrais];
+    praca.centrais = [...praca.centrais, ...centrais];
+    // console.log(praca.centrais);
+    // console.log([...praca.centrais, ...centrais]);
+    praca.centrais = centrais;
     await this.pracasRepository.save(praca);
     return praca;
   }
