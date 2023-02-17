@@ -159,3 +159,11 @@ function getCategoriasSubcategorias(categories: ICategorias[]) {
         }
       }
 
+
+var obj = ['cor', 'caneta', 'hexadecimal'] 
+.concat([null]) //Remover caso não queira que o ultimo seja sempre null
+.reverse()
+.reduce(function(a,b){
+ return {[b]:a}
+});
+console.log(obj)
