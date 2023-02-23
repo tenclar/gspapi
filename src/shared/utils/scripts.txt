@@ -167,3 +167,15 @@ var obj = ['cor', 'caneta', 'hexadecimal']
  return {[b]:a}
 });
 console.log(obj)
+
+
+
+
+
+function createMenu(menuItems, parentId = null) {
+  return menuItems.reduce((acc, { id, title, parentId: itemParentId }) => {
+    const subMenu = itemParentId === parentId ? createMenu(menuItems, id) : [];
+    acc.push({ ...item, subMenu: subMenu.length ? subMenu : undefined });
+    return acc;
+  }, []);
+}
